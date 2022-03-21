@@ -8,7 +8,7 @@ There are $P$ items(symbols) corresponding for each column.
 The probability of the $i$-th item to be on the any row on the $j$-th
 column is equal $p_{i,j}$.
 The column is formed by the next rule:
-at first the bottom row is formed, than another symbol is generated
+at first the bottom row is form ed, than another symbol is generated
 on the upper row - this symbol cannot be the same that is on bottom row:
 so the probality of $i_1$-th item to be there is $p_{i_1}/(1-p_{i})$, where
 $i \neq i_1$. The same way, the next symbol cannot equal to any of the previous
