@@ -78,8 +78,6 @@ class OneHandBandit:
 
     # methods to good display of games...
 
-    # todo: я повинен сгенерувати ймовірності у цьому методі чи це просто сеттер
-    #  та необхідно додатково написати метод генерующий ймовірності?
     # Here is the trickiest part
     # we want to differ probabilities of images
     # on each column and row
