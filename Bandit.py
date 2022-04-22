@@ -1,7 +1,9 @@
 from __future__ import annotations
 
-from typing import Dict, Tuple, List
+from typing import Dict, Tuple, List, Optional
 import numpy as np
+from CustomExceptions import CombinationLengthException, CombinationValuesException, WinningMoneyException, \
+    ProbabilitiesSumException, ProbabilitiesArrayLengthException, SettingStateException
 
 
 class OneHandBandit:
@@ -13,18 +15,21 @@ class OneHandBandit:
     """
     players: List[OneHandBandit] = []
 
-    def __init__(self, m: int, n: int, k: int):
+    def __init__(self, m: int, n: int, k: int, probs: Optional[List[float, ...]] = None):
         """
         m: number of columns
         n: number of rows
         k: number of pictures
-
+        k(number of pictures) must be greater or equal to n(number of rows)
         """
-        # todo: не дуже розумію де має використовуватись змінна drumsColumns
+
         self.drumsColumns = [[i for i in range(k)] for _ in range(m)]
         self.columnsNumb = m
         self.rowsNumb = n
         self.picturesNumb = k
+
+        self.probabilities: np.ndarray[float, ...] = np.array([], dtype=float)
+        self.setProbabilties(probs)
 
         self.combinations: Dict[Tuple[int, ...], int] = dict()
         self.price: int = 0
@@ -66,7 +71,6 @@ class OneHandBandit:
         self.price = price
 
     # money player gives to bandit
-    # todo: цей метод має просто встановлювати значення змінної money?
     def startGame(self, money: int) -> None:
         if money > 0:
             self.money = money
@@ -79,11 +83,29 @@ class OneHandBandit:
     # Here is the trickiest part
     # we want to differ probabilities of images
     # on each column and row
-    def _setProbabilties(self):
-        self.probs = [[]]  # ****
+    def setProbabilties(self, probs: Optional[List[float, ...]] = None):
+        if probs is None:
+            # uniform distribution
+            probs = [1 / self.picturesNumb for i in range(self.picturesNumb)]
+
+        if 0.001 < abs(sum(probs) - 1.0) < 0.001:
+            # sum of probs dont equal 1
+            raise ProbabilitiesSumException
+
+        if len(probs) != self.picturesNumb:
+            raise ProbabilitiesArrayLengthException
+
+        self.probabilities = np.array(probs)
+
+    def genProbabilities(self, rolledPicturesIdxs: List[int, ...]) -> List:
+        newProbs = np.array(self.probabilities, dtype=float)
+        divideCoeff = 1 - sum([self.probabilities[idx] for idx in rolledPicturesIdxs])
+        newProbs[rolledPicturesIdxs] = 0.0
+        newProbs = newProbs / divideCoeff
+        return list(newProbs)
 
     # randomly display n*m result of turn
-    def currentTurn(self) -> None:
+    def currentTurn(self) -> int:
         """
         return: np.array([np.array(dtype=int), ])
         example:
@@ -92,8 +114,10 @@ class OneHandBandit:
         self.state = np.array([self.turnColumn(i) for i in range(self.columnsNumb)])
         self.money -= self.price
         self.moneySpent += self.price
+        won = self.currentWon()
 
         self.printState()
+        return won
 
     # this methods could be with further changes....
     # our probalities are not necessary uniform!!!!
@@ -105,9 +129,27 @@ class OneHandBandit:
         # easy uniform probability form
         # could be kept for testing
         # but more complex form also implemented
-        return np.random.randint(self.picturesNumb, size=self.rowsNumb)
+        downIdx = self.rowsNumb - 1
+        upIdx = 0
+        rolledPicturesIdx = []
+        resColumn = [None, ] * self.columnsNumb
+        for idx in range(self.rowsNumb):
+            newProbs = self.genProbabilities(rolledPicturesIdxs=rolledPicturesIdx)
 
-    # TODO: return i-th row
+            assert abs(sum(newProbs) - 1) < 0.001
+
+            rolledPicIdx = np.random.choice(self.drumsColumns[i], size=1, p=newProbs)[0]
+            rolledPicturesIdx.append(rolledPicIdx)
+
+            if (idx % 2) == 0:
+                resColumn[downIdx] = rolledPicIdx
+                downIdx -= 1
+            else:
+                resColumn[upIdx] = rolledPicIdx
+                upIdx += 1
+
+        return resColumn
+
     def getRow(self, i) -> np.array:
         return np.array([self.state[j, i] for j in range(self.columnsNumb)])
 
@@ -118,7 +160,7 @@ class OneHandBandit:
     def printState(self):
         print(f"current state: \n{self.state.T}")
         # print("money spent:", self.moneySpent)
-        # print("money won:", self.moneyWon)
+        print("money won:", self.moneyWon)
         print("money remained:", self.money)
 
     # getters ..setters
@@ -149,8 +191,7 @@ class OneHandBandit:
             return None
         # play game n times
         for _ in range(n):
-            self.currentTurn()
-            won = self.currentWon()
+            won = self.currentTurn()
             print(f"you won {won} money for one turn")
             print(f"you spent {self.price} money for one turn")
             print()
@@ -170,41 +211,12 @@ class OneHandBandit:
 
     # Our main goal
     # !! modification needed
-    # todo: не розумію як я маю по іншому описати цю функцію
     def getWinCoef(self):
         return self.moneyWon / self.moneySpent
 
 
-class SettingStateException(Exception):
-    def __str__(self):
-        return "invalid values for state massive: values in each row have to be distinct"
-
-
-class SettingWinningCombinationsException(Exception):
-    def __str__(self):
-        return "invalid values for dict combinations:"
-
-
-class CombinationLengthException(SettingWinningCombinationsException):
-    def __str__(self):
-        return super().__str__() + " key length of dict combinations have to equal number columns " \
-                                   "of massive state in class OneHandBandit"
-
-
-class CombinationValuesException(SettingWinningCombinationsException):
-    def __str__(self):
-        return super().__str__() + " key values of dict combinations have to be " \
-                                   "lower than (picturesNumb - 1) in class OneHandBandit" \
-                                   "and greater than 0"
-
-
-class WinningMoneyException(SettingWinningCombinationsException):
-    def __str__(self):
-        return super().__str__() + " winning money have to be greater than 0"
-
-
 if __name__ == "__main__":
-    p1 = OneHandBandit(3, 3, 4)
+    p1 = OneHandBandit(3, 3, 4, probs=[0.5, 0.2, 0.2, 0.1])
     p1.setPriceOfGame(10)
     p1.setWinningCombs({(0, 0, 0): 15, (1, 1, 1): 15, (2, 2, 2): 15, (1, 2, 3): 20, })
     p1.addWinningComb((3, 3, 3), 15)
@@ -213,7 +225,7 @@ if __name__ == "__main__":
 
     print(f"{p1.currentPlayerWon=}")
 
-    p2 = OneHandBandit(4, 3, 5)
+    p2 = OneHandBandit(4, 3, 5, probs=[0.1, 0.1, 0.1, 0.1, 0.6])
     p2.setPriceOfGame(10)
     p2.setWinningCombs({(0, 0, 0, 0): 15, (1, 1, 1, 1): 15, (2, 2, 2, 2): 15, (3, 3, 3, 3): 15, (1, 2, 3, 4): 20, })
     p2.addWinningComb((4, 4, 4, 4), 15)
