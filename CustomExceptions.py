@@ -1,6 +1,6 @@
 class SettingStateException(Exception):
     def __str__(self):
-        return "invalid values for state massive: values in each row have to be distinct"
+        return "invalid values for state massive: values in each column have to be distinct"
 
 
 class SettingWinningCombinationsException(Exception):
@@ -9,6 +9,10 @@ class SettingWinningCombinationsException(Exception):
 
 
 class CombinationLengthException(SettingWinningCombinationsException):
+    """
+    key length of dict combinations have to equal number columns of massive state in class OneHandBandit
+    """
+
     def __str__(self):
         return super().__str__() + " key length of dict combinations have to equal number columns " \
                                    "of massive state in class OneHandBandit"
