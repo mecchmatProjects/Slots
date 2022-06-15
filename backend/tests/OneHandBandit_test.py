@@ -1,7 +1,7 @@
 from unittest import TestCase, main
 
-from Bandit import OneHandBandit
-from CustomExceptions import *
+from backend.Bandit import OneHandBandit
+from backend.CustomExceptions import *
 
 
 class OneHandBanditTest(TestCase):
@@ -66,7 +66,7 @@ class OneHandBanditTest(TestCase):
             self.banditObj.setProbabilities(probs=probs)
 
     def test_setProbabilitiesFromTxtFile(self):
-        filename = "tests/test_probabilities.txt"
+        filename = "backend/tests/test_probabilities.txt"
         with open(filename, "r") as f:
             probs = list(map(float, f.readline().split(" ")))
         self.banditObj.setProbabilitiesFromTxtFile(filename)

@@ -1,0 +1,1909 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>backend.Bandit API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>backend.Bandit</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">from __future__ import annotations
+
+import os
+from multiprocessing import Pool
+from typing import Dict, Tuple, List, Optional, Union
+import numpy as np
+from tqdm import tqdm
+
+from backend.CustomExceptions import *
+from backend.GenAlgorithm import GeneticAlgorithm
+
+
+class OneHandBandit:
+    &#34;&#34;&#34; &#34;&#34;&#34;
+    players: List[OneHandBandit] = []
+
+    def __init__(self, m: int, n: int, k: int, probs: Optional[List[float, ...]] = None):
+        &#34;&#34;&#34;функція конструктор для класу OneHandBandit
+        Args:
+            m: number of columns
+            n: number of rows
+            k: number of pictures
+
+                k(number of pictures) must be greater or equal to n(number of rows)
+
+            probs: probability of each picture appearance
+        &#34;&#34;&#34;
+
+        self.drumsColumns = [[i for i in range(k)] for _ in range(m)]
+        self.columnsNumb = m
+        self.rowsNumb = n
+        self.picturesNumb = k
+
+        self.probabilities: List[float, ...] = list()
+        self.setProbabilities(probs)
+
+        self.combinations: Dict[Tuple[int, ...], int] = dict()
+        self.price: int = 0
+
+        self.money: int = 0
+        self.moneySpent = 0
+        self.moneyWon: int = 0
+
+        self.state: List[List[int,],] = list()
+
+        self.genAlgo = GeneticAlgorithm(self)
+
+        OneHandBandit.players.append(self)
+
+    def setWinningCombs(self, combs: Dict[Tuple[int, ...], int]):
+        &#34;&#34;&#34;функція, яка встановлює виграшні комбінації
+
+        Args:
+          combs: dict of winning combinations
+
+            example: { (7, 7, 7): 100, (3, 5, 7): 200, (4, 3, 0): 500 }
+
+        Returns:
+
+        &#34;&#34;&#34;
+        combs = combs.copy()
+        for comb in combs:
+            if len(comb) != self.columnsNumb:
+                raise CombinationLengthException
+            elif max(comb) &gt; (self.picturesNumb - 1) or min(comb) &lt; 0:
+                raise CombinationValuesException
+            elif combs[comb] &lt; 0:
+                raise WinningMoneyException
+
+        self.combinations = combs
+
+    def addWinningComb(self, comb: Tuple[int, ...], win: int) -&gt; None:
+        &#34;&#34;&#34;функція, яка додає одну виграшну комбінацію до списку виграшних комбінацій
+
+        Args:
+          comb: комбінація індексів зображень
+          win: виграшна сума
+
+        Returns:
+
+        &#34;&#34;&#34;
+        self.combinations[comb] = win
+
+    # the price of 1 turn
+    def setPriceOfGame(self, price) -&gt; None:
+        &#34;&#34;&#34;функція, яка встановлює вартість однієї гри
+
+        Args:
+          price: вартість однієї гри
+
+        Returns:
+
+        &#34;&#34;&#34;
+        self.price = price
+
+    # money player gives to bandit
+    def startGame(self, money: int, modeling: bool = False) -&gt; None:
+        &#34;&#34;&#34;функція, яка вносить до автомату певну суму грошей, на які можна грати
+
+        Args:
+          money: сума грошей, яка вноситься до автомату
+          modeling: параметр, який регулює інформативність функції
+
+        Returns:
+
+        &#34;&#34;&#34;
+        if money &gt; 0:
+            self.money = money
+            if not modeling:
+                print(f&#34;you deposited {money} money&#34;)
+
+    def setProbabilities(self, probs: Optional[List[float, ...]] = None) -&gt; None:
+        &#34;&#34;&#34;функція, яка встановлює ймовірності для відповідних зображень з індексами від 0 до self.picturesNumb - 1,
+        слідкуючи за тим, щоб сума ймовірностей була рівною одиниці
+
+        Args:
+          probs: ймовірності зображень
+
+        Returns:
+
+        &#34;&#34;&#34;
+        if probs is None:
+            # uniform distribution
+            probs = [1 / self.picturesNumb for i in range(self.picturesNumb)]
+
+        if 0.001 &lt; abs(sum(probs) - 1.0):
+            # sum of probs dont equal 1
+            raise ProbabilitiesSumException
+
+        if len(probs) != self.picturesNumb:
+            raise ProbabilitiesArrayLengthException
+
+        self.probabilities = probs.copy()
+
+    def setProbabilitiesFromTxtFile(self, filename: str = &#34;probabilities.txt&#34;) -&gt; None:
+        &#34;&#34;&#34;функція, яка читає ймовірності з файлу, які розділені одним пробілом та визиває функцію self.setProbabilities
+
+        Args:
+          filename: ім&#39;я файлу з ймовірностями
+
+        Returns:
+
+        &#34;&#34;&#34;
+        with open(filename, &#34;r&#34;) as f:
+            probsLine = f.readline()
+            probs = list(map(lambda x: float(x), probsLine.split(&#34; &#34;)))
+
+        self.setProbabilities(probs)
+
+    def genBaseProbabilities(self, probsCount: int, returnCoef: Optional[float] = None,
+                             debug: bool = False) -&gt; List[float]:
+        &#34;&#34;&#34;функція, яка генерує список ймовірностей, сума яких рівна одиниці.
+
+        Можлива генерація випадкових ймовірностей
+        та генерація ймовірностей, які б задовольняли певний коефіцієнт віддачі автомату
+
+        Args:
+          probsCount: довжина списку ймовірностей
+          returnCoef: коефіцієнт віддачі автомату, який має задовольняти ймовірностям
+
+            якщо returnCoef is None, то генеруються випадкові ймовірності
+
+            якщо returnCoef is not None, то генеруються ймовірності за допомогою генетичного алгоритму
+
+          debug: параметр, який регулює інформативність функції
+
+        Returns:
+          згенерований список ймовірностей
+
+        &#34;&#34;&#34;
+        probs = []
+        if returnCoef is None:
+            # generate random probabilities
+            high = 1
+            e = 0.25 * high
+
+            for _ in range(probsCount - 1):
+                probs.append(np.random.uniform(0, high - e))
+                high -= probs[-1]
+                e = 0.01 * high
+            probs.append(high)
+            return probs
+        else:
+            probs = self.genAlgo.geneticAlgorithm(probsCount=probsCount, goalValue=returnCoef, debug=debug)
+            return probs
+
+    def getReturnCoef(self, gamesCount: int = 10 ** 4, probs: Optional[List[float, ...]] = None,
+                      isGraph: bool = False) -&gt; Union[float, List[float]]:
+        &#34;&#34;&#34;функція, яка рахує коефіцієнт віддачі автомата, моделюючи методом Монте-Карло gamesCount ігор.
+
+        функція рахує середній виграш гравця, протягом gamesCount ігор, та ділить його на ціну однієї гри
+
+        Args:
+          gamesCount: кількість ігор, які будуть промодельовані
+          probs: ймовірності зображень, з якими буде проводитись кожна гра
+          isGraph: параметр, який відповідає за надання функцією додаткових даних необхідних для створення графіку
+
+        Returns:
+            коефіцієнт віддачі автомату, якщо isGraph рівне False
+
+            список коефіцієнтів віддачі автомату для кожної гри, якщо isGraph рівне True
+
+        &#34;&#34;&#34;
+        oldProbs = self.probabilities
+        oldMoneySpent = self.moneySpent
+        oldMoneyWon = self.moneyWon
+        if probs is not None:
+            self.setProbabilities(probs)
+        self.moneyWon = 0
+        self.moneySpent = 0
+
+        money = self.price * gamesCount
+
+        modeling = True
+        self.startGame(money, modeling=modeling)
+        meanRCs = self.play(gamesCount, modeling=modeling, isGraph=isGraph)
+        gameReturn = self.moneyWon
+        gameReturnPercentage = gameReturn / self.moneySpent
+        if probs is not None:
+            self.setProbabilities(oldProbs)
+        self.moneyWon = oldMoneyWon
+        self.moneySpent = oldMoneySpent
+        if isGraph:
+            return meanRCs
+
+        return gameReturnPercentage
+
+    def getReturnCoefWithNCores(self, gamesCount: int = 10 ** 3, probs: Optional[List[float, ...]] = None,
+                                coresCount: int = -1):
+        &#34;&#34;&#34;функція, яка прискорює обчислення коефіцієнту віддачі автомату для великої кількості ігор,
+        шляхом розпаралелювання роботи.
+
+        функція запускає coresCount процесів, де виконуються функції self.getReturnCoef,
+        але для меншого значення gamesCount, рівному gamesCount // coresCount.
+
+        Args:
+          gamesCount: кількість ігор, які будуть промодельовані
+          probs: ймовірності зображень, з якими буде проводитись кожна гра
+          coresCount: кількість процесів, які запустить дана функція
+
+        Returns:
+          коефіцієнт віддачі автомату
+
+        &#34;&#34;&#34;
+        if coresCount == -1:
+            coresCount = int(os.cpu_count() * 0.75)
+            if coresCount == 0:
+                coresCount = 1
+        elif coresCount == 0:
+            return self.getReturnCoef(gamesCount, probs)
+
+        gamesCountList = [gamesCount // coresCount, ] * coresCount
+        gamesCountList[-1] += (gamesCount - sum(gamesCountList))
+
+        args = zip(gamesCountList, [probs, ] * len(gamesCountList), )
+        # args = list(args)
+
+        with Pool(processes=coresCount) as executor:
+            results = executor.starmap(self.getReturnCoef, args)
+
+        res = sum(results) / coresCount
+        return res
+
+    # @benchmark
+    def currentTurn(self, modeling: bool = False) -&gt; int:
+        &#34;&#34;&#34;функція, яка генерує матрицю однієї гри(складається з стовпців, кожен з яких містить в собі індекси зображень)
+        та викликає функцію self.setState
+
+        Args:
+          modeling: параметр, який регулює інформативність функції
+
+        Returns:
+          виграш гравця
+
+        &#34;&#34;&#34;
+        self.setState([self.turnColumn(i) for i in range(self.columnsNumb)])
+        self.money -= self.price
+        self.moneySpent += self.price
+        won = self.currentWon()
+
+        if not modeling:
+            self.printState()
+
+        return won
+
+    def turnColumn(self, i) -&gt; List[int,]:
+        &#34;&#34;&#34;функція, яка генерує один стовпець для майбутньої матриці однієї гри
+
+        Args:
+          i: індекс стовпця, який також відповідає індексу стовпця з self.drumColumns,
+             де кожен стовпець містить індекси зображень, які взагалі можуть з&#39;явитися в і-тому стовпці матриці однієї гри
+
+        Returns:
+          список індексів зображень
+
+        &#34;&#34;&#34;
+        downIdx = self.rowsNumb - 1
+        upIdx = 0
+        rolledPicturesIdx = []
+        resColumn = [-1, ] * self.rowsNumb
+        for idx in range(self.rowsNumb):
+            newProbs = self.genTurnProbabilities(rolledPicturesIdxs=rolledPicturesIdx)
+
+            # assert abs(sum(newProbs) - 1) &lt; 0.001
+
+            rolledPicIdx = np.random.choice(self.drumsColumns[i], size=1, p=newProbs)[0]
+            rolledPicturesIdx.append(rolledPicIdx)
+
+            if (idx % 2) == 0:
+                resColumn[downIdx] = rolledPicIdx
+                downIdx -= 1
+            else:
+                resColumn[upIdx] = rolledPicIdx
+                upIdx += 1
+
+        return resColumn
+
+    def genTurnProbabilities(self, rolledPicturesIdxs: List[int, ...]) -&gt; List:
+        &#34;&#34;&#34;функція, яка обраховує ймовірності для зображень у автоматі при генерації одного стовпчика,
+        точніше описано в файлі README.ipynb
+
+        Args:
+          rolledPicturesIdxs: зображення, які уже були згенеровані у рядках одного стовпчика
+
+        Returns:
+          значення ймовірностей для наступної генерації
+
+        &#34;&#34;&#34;
+        newProbs = np.array(self.probabilities, dtype=float)
+        divideCoeff = 1 - sum([self.probabilities[idx] for idx in rolledPicturesIdxs])
+        newProbs[rolledPicturesIdxs] = 0.0
+        newProbs = newProbs / divideCoeff
+        return list(newProbs)
+
+    def currentWon(self) -&gt; int:
+        &#34;&#34;&#34;функція, яка аналізує поточну матрицю гри та повертає весь виграш гравця за поточну гру
+
+        Args:
+
+        Returns:
+          весь виграш гравця
+
+        &#34;&#34;&#34;
+        won = 0
+        for i in range(self.rowsNumb):
+            comb = tuple(self.getRow(i))
+            if comb in self.combinations:
+                # it is possible to have several winning combinations....
+                won += self.combinations[comb]
+
+        self.moneyWon += won  # ???? not sure if it is needed
+        return won
+
+    def getRow(self, i) -&gt; np.array:
+        &#34;&#34;&#34;функція, яка повертає і-ий рядок матриці self.state(матриці однієї гри)
+
+        Args:
+          i: індекс рядка матриці гри
+
+        Returns:
+          список індексів зображень
+
+        &#34;&#34;&#34;
+        return np.array([self.state[j][i] for j in range(self.columnsNumb)])
+
+    def getColumn(self, j):
+        &#34;&#34;&#34;функція, яка повертаю j-ий стовпець матриці self.state(матриці однієї гри)
+
+        Args:
+          j: індекс стовпця матриці гри
+
+        Returns:
+          список індексів зображень
+
+        &#34;&#34;&#34;
+        return self.state[j]
+
+    def getState(self) -&gt; np.array:
+        &#34;&#34;&#34;функція, яка повертає матрицю self.state(матрицю однієї гри)
+
+        Args:
+
+        Returns:
+          транспонована(задля спрощення її відображення) матриця self.state
+
+        &#34;&#34;&#34;
+        return np.array(self.state).T
+
+    def setState(self, state: List[List[int,],]) -&gt; None:
+        &#34;&#34;&#34;функція, яка встановлює матрицю однієї гри
+
+        Args:
+          state: матриця індексів зображень однієї гри
+
+        Returns:
+
+        &#34;&#34;&#34;
+        if all([len(col) == len(set(col)) for col in state]):
+            self.state = state
+        else:
+            raise SettingStateException
+
+    def printState(self) -&gt; None:
+        &#34;&#34;&#34;функція, яка відображає матрицю поточної гри, весь виграш гравця, гроші, які у нього залишилися&#34;&#34;&#34;
+        print(f&#34;current state: \n{self.getState()}&#34;)
+        # print(&#34;money spent:&#34;, self.moneySpent)
+        print(&#34;money won:&#34;, self.moneyWon)
+        print(&#34;money remained:&#34;, self.money)
+
+    def play(self, n, modeling: bool = False, isGraph: bool = False) -&gt; Union[Optional[List[int,]],
+                                                                              List[float]]:
+        &#34;&#34;&#34;функція, яка проводить n ігор
+
+        Args:
+          n: кількість ігор
+          modeling: параметр, який впливає на інформативність функції
+          isGraph: параметра, який керує поверненням спеціальних значень
+
+        Returns:
+          список виграшів гравця за n ігор, якщо isGraph рівне False
+
+          список коефіцієнтів віддачі автомату для кожної з n ігор, якщо isGraph рівне True
+
+        &#34;&#34;&#34;
+        if self.money &lt; self.price * n:
+            print(&#34;Not enough money&#34;)
+            return None
+
+        wons = []
+        meanRCs = []
+        # play game n times
+        for i in range(n):
+            won = self.currentTurn(modeling=modeling)
+            wons.append(won)
+            if not modeling:
+                print(f&#34;you won {won} money for one turn&#34;)
+                print(f&#34;you spent {self.price} money for one turn&#34;)
+                print()
+
+            if isGraph:
+                meanRCs.append(sum(wons) / ((i + 1) * self.price))
+
+        if isGraph:
+            return meanRCs
+
+        if not modeling:
+            return wons
+
+    # winning sum in fact could be (and often is) negative ;-))
+    @property
+    def currentPlayerWon(self):
+        &#34;&#34;&#34;функція, яка декорується, як властивість об&#39;єкту та повертає весь виграш гравця,
+        віднявши від нього витрати гравця
+
+        Args:
+
+        Returns:
+          виграш гравця - витрати гравця
+
+        &#34;&#34;&#34;
+        return self.moneyWon - self.moneySpent  # not sure
+
+    @property
+    def totalPlayersWon(self):
+        &#34;&#34;&#34;функція, яка декорується, як властивість об&#39;єкту та повертає весь виграш всіх гравців,
+        який вона обраховує, використовуючи функцію self.currentPlayerWon
+
+        Args:
+
+        Returns:
+          виграш всіх гравців - витрати всіх гравців
+
+        &#34;&#34;&#34;
+        totalWin = 0
+        for p in OneHandBandit.players:
+            totalWin += p.currentPlayerWon
+        return totalWin
+
+
+if __name__ == &#34;__main__&#34;:
+    p2 = OneHandBandit(4, 3, 5)
+    # p2.setProbabilitiesFromTxtFile(&#34;probabilities.txt&#34;)
+
+    p2.setPriceOfGame(10)
+    p2.setWinningCombs({(0, 0, 0, 0): 15, (1, 1, 1, 1): 15, (2, 2, 2, 2): 15, (3, 3, 3, 3): 15, (1, 2, 3, 4): 20, })
+    p2.addWinningComb((4, 4, 4, 4), 15)
+
+    # p2.startGame(100)
+    # p2.play(10)
+    try:
+        returnCoef = float(
+            input(&#34;write down return coefficient for probabilities you would like get for(Example 0.9): &#34;))
+    except Exception as e:
+        print(&#34;during input error occurred:&#34;, e)
+        print(&#34;return coefficient set to 0.9&#34;)
+        returnCoef = 0.9
+    # np.random.seed(42)
+    probs = p2.genBaseProbabilities(p2.picturesNumb, returnCoef, debug=True)
+    print(f&#34;{probs=}&#34;)
+    print(f&#34;fitness val for probs and goalValue={returnCoef}:&#34;,
+          p2.genAlgo.fitness_func(probs=probs, goalValue=returnCoef))
+    print(&#34;return coef (goalValue):&#34;, p2.getReturnCoefWithNCores(probs=probs, gamesCount=10 ** 4))
+
+    probsStrs = &#34; &#34;.join(map(str, probs))
+    with open(&#34;probabilities.txt&#34;, &#34;w&#34;) as f:
+        f.write(probsStrs)
+    # modelingGamesCount = 2000
+    #
+    # print(p2.genBaseProbabilities(5, returnCoef=0.8))
+    # p2.getReturnCoefWithNCores(modelingGamesCount)
+    # l = []
+    # t0 = time.time()
+    # for i in range(10):
+    #
+    #     returnCoef = p2.getReturnCoefWithNCores(gamesCount=modelingGamesCount, coresCount=5)
+    #     l.append(returnCoef)
+    #     print(f&#34;{i}) this one hand bandit return coefficient: {returnCoef} &#34;
+    #           f&#34;for {modelingGamesCount} games&#34;)
+    # print(&#34;min max range:&#34;, max(l) - min(l))
+    # print(time.time() - t0, &#34;secs&#34;)
+
+# метод ньютона
+
+# генетичний алгоритм(рандомна мутація)</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="backend.Bandit.OneHandBandit"><code class="flex name class">
+<span>class <span class="ident">OneHandBandit</span></span>
+<span>(</span><span>m: int, n: int, k: int, probs: Optional[List[float, ...]] = None)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>функція конструктор для класу OneHandBandit</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>m</code></strong></dt>
+<dd>number of columns</dd>
+<dt><strong><code>n</code></strong></dt>
+<dd>number of rows</dd>
+<dt><strong><code>k</code></strong></dt>
+<dd>
+<p>number of pictures</p>
+<p>k(number of pictures) must be greater or equal to n(number of rows)</p>
+</dd>
+<dt><strong><code>probs</code></strong></dt>
+<dd>probability of each picture appearance</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class OneHandBandit:
+    &#34;&#34;&#34; &#34;&#34;&#34;
+    players: List[OneHandBandit] = []
+
+    def __init__(self, m: int, n: int, k: int, probs: Optional[List[float, ...]] = None):
+        &#34;&#34;&#34;функція конструктор для класу OneHandBandit
+        Args:
+            m: number of columns
+            n: number of rows
+            k: number of pictures
+
+                k(number of pictures) must be greater or equal to n(number of rows)
+
+            probs: probability of each picture appearance
+        &#34;&#34;&#34;
+
+        self.drumsColumns = [[i for i in range(k)] for _ in range(m)]
+        self.columnsNumb = m
+        self.rowsNumb = n
+        self.picturesNumb = k
+
+        self.probabilities: List[float, ...] = list()
+        self.setProbabilities(probs)
+
+        self.combinations: Dict[Tuple[int, ...], int] = dict()
+        self.price: int = 0
+
+        self.money: int = 0
+        self.moneySpent = 0
+        self.moneyWon: int = 0
+
+        self.state: List[List[int,],] = list()
+
+        self.genAlgo = GeneticAlgorithm(self)
+
+        OneHandBandit.players.append(self)
+
+    def setWinningCombs(self, combs: Dict[Tuple[int, ...], int]):
+        &#34;&#34;&#34;функція, яка встановлює виграшні комбінації
+
+        Args:
+          combs: dict of winning combinations
+
+            example: { (7, 7, 7): 100, (3, 5, 7): 200, (4, 3, 0): 500 }
+
+        Returns:
+
+        &#34;&#34;&#34;
+        combs = combs.copy()
+        for comb in combs:
+            if len(comb) != self.columnsNumb:
+                raise CombinationLengthException
+            elif max(comb) &gt; (self.picturesNumb - 1) or min(comb) &lt; 0:
+                raise CombinationValuesException
+            elif combs[comb] &lt; 0:
+                raise WinningMoneyException
+
+        self.combinations = combs
+
+    def addWinningComb(self, comb: Tuple[int, ...], win: int) -&gt; None:
+        &#34;&#34;&#34;функція, яка додає одну виграшну комбінацію до списку виграшних комбінацій
+
+        Args:
+          comb: комбінація індексів зображень
+          win: виграшна сума
+
+        Returns:
+
+        &#34;&#34;&#34;
+        self.combinations[comb] = win
+
+    # the price of 1 turn
+    def setPriceOfGame(self, price) -&gt; None:
+        &#34;&#34;&#34;функція, яка встановлює вартість однієї гри
+
+        Args:
+          price: вартість однієї гри
+
+        Returns:
+
+        &#34;&#34;&#34;
+        self.price = price
+
+    # money player gives to bandit
+    def startGame(self, money: int, modeling: bool = False) -&gt; None:
+        &#34;&#34;&#34;функція, яка вносить до автомату певну суму грошей, на які можна грати
+
+        Args:
+          money: сума грошей, яка вноситься до автомату
+          modeling: параметр, який регулює інформативність функції
+
+        Returns:
+
+        &#34;&#34;&#34;
+        if money &gt; 0:
+            self.money = money
+            if not modeling:
+                print(f&#34;you deposited {money} money&#34;)
+
+    def setProbabilities(self, probs: Optional[List[float, ...]] = None) -&gt; None:
+        &#34;&#34;&#34;функція, яка встановлює ймовірності для відповідних зображень з індексами від 0 до self.picturesNumb - 1,
+        слідкуючи за тим, щоб сума ймовірностей була рівною одиниці
+
+        Args:
+          probs: ймовірності зображень
+
+        Returns:
+
+        &#34;&#34;&#34;
+        if probs is None:
+            # uniform distribution
+            probs = [1 / self.picturesNumb for i in range(self.picturesNumb)]
+
+        if 0.001 &lt; abs(sum(probs) - 1.0):
+            # sum of probs dont equal 1
+            raise ProbabilitiesSumException
+
+        if len(probs) != self.picturesNumb:
+            raise ProbabilitiesArrayLengthException
+
+        self.probabilities = probs.copy()
+
+    def setProbabilitiesFromTxtFile(self, filename: str = &#34;probabilities.txt&#34;) -&gt; None:
+        &#34;&#34;&#34;функція, яка читає ймовірності з файлу, які розділені одним пробілом та визиває функцію self.setProbabilities
+
+        Args:
+          filename: ім&#39;я файлу з ймовірностями
+
+        Returns:
+
+        &#34;&#34;&#34;
+        with open(filename, &#34;r&#34;) as f:
+            probsLine = f.readline()
+            probs = list(map(lambda x: float(x), probsLine.split(&#34; &#34;)))
+
+        self.setProbabilities(probs)
+
+    def genBaseProbabilities(self, probsCount: int, returnCoef: Optional[float] = None,
+                             debug: bool = False) -&gt; List[float]:
+        &#34;&#34;&#34;функція, яка генерує список ймовірностей, сума яких рівна одиниці.
+
+        Можлива генерація випадкових ймовірностей
+        та генерація ймовірностей, які б задовольняли певний коефіцієнт віддачі автомату
+
+        Args:
+          probsCount: довжина списку ймовірностей
+          returnCoef: коефіцієнт віддачі автомату, який має задовольняти ймовірностям
+
+            якщо returnCoef is None, то генеруються випадкові ймовірності
+
+            якщо returnCoef is not None, то генеруються ймовірності за допомогою генетичного алгоритму
+
+          debug: параметр, який регулює інформативність функції
+
+        Returns:
+          згенерований список ймовірностей
+
+        &#34;&#34;&#34;
+        probs = []
+        if returnCoef is None:
+            # generate random probabilities
+            high = 1
+            e = 0.25 * high
+
+            for _ in range(probsCount - 1):
+                probs.append(np.random.uniform(0, high - e))
+                high -= probs[-1]
+                e = 0.01 * high
+            probs.append(high)
+            return probs
+        else:
+            probs = self.genAlgo.geneticAlgorithm(probsCount=probsCount, goalValue=returnCoef, debug=debug)
+            return probs
+
+    def getReturnCoef(self, gamesCount: int = 10 ** 4, probs: Optional[List[float, ...]] = None,
+                      isGraph: bool = False) -&gt; Union[float, List[float]]:
+        &#34;&#34;&#34;функція, яка рахує коефіцієнт віддачі автомата, моделюючи методом Монте-Карло gamesCount ігор.
+
+        функція рахує середній виграш гравця, протягом gamesCount ігор, та ділить його на ціну однієї гри
+
+        Args:
+          gamesCount: кількість ігор, які будуть промодельовані
+          probs: ймовірності зображень, з якими буде проводитись кожна гра
+          isGraph: параметр, який відповідає за надання функцією додаткових даних необхідних для створення графіку
+
+        Returns:
+            коефіцієнт віддачі автомату, якщо isGraph рівне False
+
+            список коефіцієнтів віддачі автомату для кожної гри, якщо isGraph рівне True
+
+        &#34;&#34;&#34;
+        oldProbs = self.probabilities
+        oldMoneySpent = self.moneySpent
+        oldMoneyWon = self.moneyWon
+        if probs is not None:
+            self.setProbabilities(probs)
+        self.moneyWon = 0
+        self.moneySpent = 0
+
+        money = self.price * gamesCount
+
+        modeling = True
+        self.startGame(money, modeling=modeling)
+        meanRCs = self.play(gamesCount, modeling=modeling, isGraph=isGraph)
+        gameReturn = self.moneyWon
+        gameReturnPercentage = gameReturn / self.moneySpent
+        if probs is not None:
+            self.setProbabilities(oldProbs)
+        self.moneyWon = oldMoneyWon
+        self.moneySpent = oldMoneySpent
+        if isGraph:
+            return meanRCs
+
+        return gameReturnPercentage
+
+    def getReturnCoefWithNCores(self, gamesCount: int = 10 ** 3, probs: Optional[List[float, ...]] = None,
+                                coresCount: int = -1):
+        &#34;&#34;&#34;функція, яка прискорює обчислення коефіцієнту віддачі автомату для великої кількості ігор,
+        шляхом розпаралелювання роботи.
+
+        функція запускає coresCount процесів, де виконуються функції self.getReturnCoef,
+        але для меншого значення gamesCount, рівному gamesCount // coresCount.
+
+        Args:
+          gamesCount: кількість ігор, які будуть промодельовані
+          probs: ймовірності зображень, з якими буде проводитись кожна гра
+          coresCount: кількість процесів, які запустить дана функція
+
+        Returns:
+          коефіцієнт віддачі автомату
+
+        &#34;&#34;&#34;
+        if coresCount == -1:
+            coresCount = int(os.cpu_count() * 0.75)
+            if coresCount == 0:
+                coresCount = 1
+        elif coresCount == 0:
+            return self.getReturnCoef(gamesCount, probs)
+
+        gamesCountList = [gamesCount // coresCount, ] * coresCount
+        gamesCountList[-1] += (gamesCount - sum(gamesCountList))
+
+        args = zip(gamesCountList, [probs, ] * len(gamesCountList), )
+        # args = list(args)
+
+        with Pool(processes=coresCount) as executor:
+            results = executor.starmap(self.getReturnCoef, args)
+
+        res = sum(results) / coresCount
+        return res
+
+    # @benchmark
+    def currentTurn(self, modeling: bool = False) -&gt; int:
+        &#34;&#34;&#34;функція, яка генерує матрицю однієї гри(складається з стовпців, кожен з яких містить в собі індекси зображень)
+        та викликає функцію self.setState
+
+        Args:
+          modeling: параметр, який регулює інформативність функції
+
+        Returns:
+          виграш гравця
+
+        &#34;&#34;&#34;
+        self.setState([self.turnColumn(i) for i in range(self.columnsNumb)])
+        self.money -= self.price
+        self.moneySpent += self.price
+        won = self.currentWon()
+
+        if not modeling:
+            self.printState()
+
+        return won
+
+    def turnColumn(self, i) -&gt; List[int,]:
+        &#34;&#34;&#34;функція, яка генерує один стовпець для майбутньої матриці однієї гри
+
+        Args:
+          i: індекс стовпця, який також відповідає індексу стовпця з self.drumColumns,
+             де кожен стовпець містить індекси зображень, які взагалі можуть з&#39;явитися в і-тому стовпці матриці однієї гри
+
+        Returns:
+          список індексів зображень
+
+        &#34;&#34;&#34;
+        downIdx = self.rowsNumb - 1
+        upIdx = 0
+        rolledPicturesIdx = []
+        resColumn = [-1, ] * self.rowsNumb
+        for idx in range(self.rowsNumb):
+            newProbs = self.genTurnProbabilities(rolledPicturesIdxs=rolledPicturesIdx)
+
+            # assert abs(sum(newProbs) - 1) &lt; 0.001
+
+            rolledPicIdx = np.random.choice(self.drumsColumns[i], size=1, p=newProbs)[0]
+            rolledPicturesIdx.append(rolledPicIdx)
+
+            if (idx % 2) == 0:
+                resColumn[downIdx] = rolledPicIdx
+                downIdx -= 1
+            else:
+                resColumn[upIdx] = rolledPicIdx
+                upIdx += 1
+
+        return resColumn
+
+    def genTurnProbabilities(self, rolledPicturesIdxs: List[int, ...]) -&gt; List:
+        &#34;&#34;&#34;функція, яка обраховує ймовірності для зображень у автоматі при генерації одного стовпчика,
+        точніше описано в файлі README.ipynb
+
+        Args:
+          rolledPicturesIdxs: зображення, які уже були згенеровані у рядках одного стовпчика
+
+        Returns:
+          значення ймовірностей для наступної генерації
+
+        &#34;&#34;&#34;
+        newProbs = np.array(self.probabilities, dtype=float)
+        divideCoeff = 1 - sum([self.probabilities[idx] for idx in rolledPicturesIdxs])
+        newProbs[rolledPicturesIdxs] = 0.0
+        newProbs = newProbs / divideCoeff
+        return list(newProbs)
+
+    def currentWon(self) -&gt; int:
+        &#34;&#34;&#34;функція, яка аналізує поточну матрицю гри та повертає весь виграш гравця за поточну гру
+
+        Args:
+
+        Returns:
+          весь виграш гравця
+
+        &#34;&#34;&#34;
+        won = 0
+        for i in range(self.rowsNumb):
+            comb = tuple(self.getRow(i))
+            if comb in self.combinations:
+                # it is possible to have several winning combinations....
+                won += self.combinations[comb]
+
+        self.moneyWon += won  # ???? not sure if it is needed
+        return won
+
+    def getRow(self, i) -&gt; np.array:
+        &#34;&#34;&#34;функція, яка повертає і-ий рядок матриці self.state(матриці однієї гри)
+
+        Args:
+          i: індекс рядка матриці гри
+
+        Returns:
+          список індексів зображень
+
+        &#34;&#34;&#34;
+        return np.array([self.state[j][i] for j in range(self.columnsNumb)])
+
+    def getColumn(self, j):
+        &#34;&#34;&#34;функція, яка повертаю j-ий стовпець матриці self.state(матриці однієї гри)
+
+        Args:
+          j: індекс стовпця матриці гри
+
+        Returns:
+          список індексів зображень
+
+        &#34;&#34;&#34;
+        return self.state[j]
+
+    def getState(self) -&gt; np.array:
+        &#34;&#34;&#34;функція, яка повертає матрицю self.state(матрицю однієї гри)
+
+        Args:
+
+        Returns:
+          транспонована(задля спрощення її відображення) матриця self.state
+
+        &#34;&#34;&#34;
+        return np.array(self.state).T
+
+    def setState(self, state: List[List[int,],]) -&gt; None:
+        &#34;&#34;&#34;функція, яка встановлює матрицю однієї гри
+
+        Args:
+          state: матриця індексів зображень однієї гри
+
+        Returns:
+
+        &#34;&#34;&#34;
+        if all([len(col) == len(set(col)) for col in state]):
+            self.state = state
+        else:
+            raise SettingStateException
+
+    def printState(self) -&gt; None:
+        &#34;&#34;&#34;функція, яка відображає матрицю поточної гри, весь виграш гравця, гроші, які у нього залишилися&#34;&#34;&#34;
+        print(f&#34;current state: \n{self.getState()}&#34;)
+        # print(&#34;money spent:&#34;, self.moneySpent)
+        print(&#34;money won:&#34;, self.moneyWon)
+        print(&#34;money remained:&#34;, self.money)
+
+    def play(self, n, modeling: bool = False, isGraph: bool = False) -&gt; Union[Optional[List[int,]],
+                                                                              List[float]]:
+        &#34;&#34;&#34;функція, яка проводить n ігор
+
+        Args:
+          n: кількість ігор
+          modeling: параметр, який впливає на інформативність функції
+          isGraph: параметра, який керує поверненням спеціальних значень
+
+        Returns:
+          список виграшів гравця за n ігор, якщо isGraph рівне False
+
+          список коефіцієнтів віддачі автомату для кожної з n ігор, якщо isGraph рівне True
+
+        &#34;&#34;&#34;
+        if self.money &lt; self.price * n:
+            print(&#34;Not enough money&#34;)
+            return None
+
+        wons = []
+        meanRCs = []
+        # play game n times
+        for i in range(n):
+            won = self.currentTurn(modeling=modeling)
+            wons.append(won)
+            if not modeling:
+                print(f&#34;you won {won} money for one turn&#34;)
+                print(f&#34;you spent {self.price} money for one turn&#34;)
+                print()
+
+            if isGraph:
+                meanRCs.append(sum(wons) / ((i + 1) * self.price))
+
+        if isGraph:
+            return meanRCs
+
+        if not modeling:
+            return wons
+
+    # winning sum in fact could be (and often is) negative ;-))
+    @property
+    def currentPlayerWon(self):
+        &#34;&#34;&#34;функція, яка декорується, як властивість об&#39;єкту та повертає весь виграш гравця,
+        віднявши від нього витрати гравця
+
+        Args:
+
+        Returns:
+          виграш гравця - витрати гравця
+
+        &#34;&#34;&#34;
+        return self.moneyWon - self.moneySpent  # not sure
+
+    @property
+    def totalPlayersWon(self):
+        &#34;&#34;&#34;функція, яка декорується, як властивість об&#39;єкту та повертає весь виграш всіх гравців,
+        який вона обраховує, використовуючи функцію self.currentPlayerWon
+
+        Args:
+
+        Returns:
+          виграш всіх гравців - витрати всіх гравців
+
+        &#34;&#34;&#34;
+        totalWin = 0
+        for p in OneHandBandit.players:
+            totalWin += p.currentPlayerWon
+        return totalWin</code></pre>
+</details>
+<h3>Class variables</h3>
+<dl>
+<dt id="backend.Bandit.OneHandBandit.players"><code class="name">var <span class="ident">players</span> : List[<a title="backend.Bandit.OneHandBandit" href="#backend.Bandit.OneHandBandit">OneHandBandit</a>]</code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+<h3>Instance variables</h3>
+<dl>
+<dt id="backend.Bandit.OneHandBandit.currentPlayerWon"><code class="name">var <span class="ident">currentPlayerWon</span></code></dt>
+<dd>
+<div class="desc"><p>функція, яка декорується, як властивість об'єкту та повертає весь виграш гравця,
+віднявши від нього витрати гравця</p>
+<p>Args:</p>
+<h2 id="returns">Returns</h2>
+<p>виграш гравця - витрати гравця</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def currentPlayerWon(self):
+    &#34;&#34;&#34;функція, яка декорується, як властивість об&#39;єкту та повертає весь виграш гравця,
+    віднявши від нього витрати гравця
+
+    Args:
+
+    Returns:
+      виграш гравця - витрати гравця
+
+    &#34;&#34;&#34;
+    return self.moneyWon - self.moneySpent  # not sure</code></pre>
+</details>
+</dd>
+<dt id="backend.Bandit.OneHandBandit.totalPlayersWon"><code class="name">var <span class="ident">totalPlayersWon</span></code></dt>
+<dd>
+<div class="desc"><p>функція, яка декорується, як властивість об'єкту та повертає весь виграш всіх гравців,
+який вона обраховує, використовуючи функцію self.currentPlayerWon</p>
+<p>Args:</p>
+<h2 id="returns">Returns</h2>
+<p>виграш всіх гравців - витрати всіх гравців</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">@property
+def totalPlayersWon(self):
+    &#34;&#34;&#34;функція, яка декорується, як властивість об&#39;єкту та повертає весь виграш всіх гравців,
+    який вона обраховує, використовуючи функцію self.currentPlayerWon
+
+    Args:
+
+    Returns:
+      виграш всіх гравців - витрати всіх гравців
+
+    &#34;&#34;&#34;
+    totalWin = 0
+    for p in OneHandBandit.players:
+        totalWin += p.currentPlayerWon
+    return totalWin</code></pre>
+</details>
+</dd>
+</dl>
+<h3>Methods</h3>
+<dl>
+<dt id="backend.Bandit.OneHandBandit.addWinningComb"><code class="name flex">
+<span>def <span class="ident">addWinningComb</span></span>(<span>self, comb: Tuple[int, ...], win: int) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>функція, яка додає одну виграшну комбінацію до списку виграшних комбінацій</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>comb</code></strong></dt>
+<dd>комбінація індексів зображень</dd>
+<dt><strong><code>win</code></strong></dt>
+<dd>виграшна сума</dd>
+</dl>
+<p>Returns:</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def addWinningComb(self, comb: Tuple[int, ...], win: int) -&gt; None:
+    &#34;&#34;&#34;функція, яка додає одну виграшну комбінацію до списку виграшних комбінацій
+
+    Args:
+      comb: комбінація індексів зображень
+      win: виграшна сума
+
+    Returns:
+
+    &#34;&#34;&#34;
+    self.combinations[comb] = win</code></pre>
+</details>
+</dd>
+<dt id="backend.Bandit.OneHandBandit.currentTurn"><code class="name flex">
+<span>def <span class="ident">currentTurn</span></span>(<span>self, modeling: bool = False) ‑> int</span>
+</code></dt>
+<dd>
+<div class="desc"><p>функція, яка генерує матрицю однієї гри(складається з стовпців, кожен з яких містить в собі індекси зображень)
+та викликає функцію self.setState</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>modeling</code></strong></dt>
+<dd>параметр, який регулює інформативність функції</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>виграш гравця</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def currentTurn(self, modeling: bool = False) -&gt; int:
+    &#34;&#34;&#34;функція, яка генерує матрицю однієї гри(складається з стовпців, кожен з яких містить в собі індекси зображень)
+    та викликає функцію self.setState
+
+    Args:
+      modeling: параметр, який регулює інформативність функції
+
+    Returns:
+      виграш гравця
+
+    &#34;&#34;&#34;
+    self.setState([self.turnColumn(i) for i in range(self.columnsNumb)])
+    self.money -= self.price
+    self.moneySpent += self.price
+    won = self.currentWon()
+
+    if not modeling:
+        self.printState()
+
+    return won</code></pre>
+</details>
+</dd>
+<dt id="backend.Bandit.OneHandBandit.currentWon"><code class="name flex">
+<span>def <span class="ident">currentWon</span></span>(<span>self) ‑> int</span>
+</code></dt>
+<dd>
+<div class="desc"><p>функція, яка аналізує поточну матрицю гри та повертає весь виграш гравця за поточну гру</p>
+<p>Args:</p>
+<h2 id="returns">Returns</h2>
+<p>весь виграш гравця</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def currentWon(self) -&gt; int:
+    &#34;&#34;&#34;функція, яка аналізує поточну матрицю гри та повертає весь виграш гравця за поточну гру
+
+    Args:
+
+    Returns:
+      весь виграш гравця
+
+    &#34;&#34;&#34;
+    won = 0
+    for i in range(self.rowsNumb):
+        comb = tuple(self.getRow(i))
+        if comb in self.combinations:
+            # it is possible to have several winning combinations....
+            won += self.combinations[comb]
+
+    self.moneyWon += won  # ???? not sure if it is needed
+    return won</code></pre>
+</details>
+</dd>
+<dt id="backend.Bandit.OneHandBandit.genBaseProbabilities"><code class="name flex">
+<span>def <span class="ident">genBaseProbabilities</span></span>(<span>self, probsCount: int, returnCoef: Optional[float] = None, debug: bool = False) ‑> List[float]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>функція, яка генерує список ймовірностей, сума яких рівна одиниці.</p>
+<p>Можлива генерація випадкових ймовірностей
+та генерація ймовірностей, які б задовольняли певний коефіцієнт віддачі автомату</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>probsCount</code></strong></dt>
+<dd>довжина списку ймовірностей</dd>
+<dt><strong><code>returnCoef</code></strong></dt>
+<dd>
+<p>коефіцієнт віддачі автомату, який має задовольняти ймовірностям</p>
+<p>якщо returnCoef is None, то генеруються випадкові ймовірності</p>
+<p>якщо returnCoef is not None, то генеруються ймовірності за допомогою генетичного алгоритму</p>
+</dd>
+<dt><strong><code>debug</code></strong></dt>
+<dd>параметр, який регулює інформативність функції</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>згенерований список ймовірностей</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def genBaseProbabilities(self, probsCount: int, returnCoef: Optional[float] = None,
+                         debug: bool = False) -&gt; List[float]:
+    &#34;&#34;&#34;функція, яка генерує список ймовірностей, сума яких рівна одиниці.
+
+    Можлива генерація випадкових ймовірностей
+    та генерація ймовірностей, які б задовольняли певний коефіцієнт віддачі автомату
+
+    Args:
+      probsCount: довжина списку ймовірностей
+      returnCoef: коефіцієнт віддачі автомату, який має задовольняти ймовірностям
+
+        якщо returnCoef is None, то генеруються випадкові ймовірності
+
+        якщо returnCoef is not None, то генеруються ймовірності за допомогою генетичного алгоритму
+
+      debug: параметр, який регулює інформативність функції
+
+    Returns:
+      згенерований список ймовірностей
+
+    &#34;&#34;&#34;
+    probs = []
+    if returnCoef is None:
+        # generate random probabilities
+        high = 1
+        e = 0.25 * high
+
+        for _ in range(probsCount - 1):
+            probs.append(np.random.uniform(0, high - e))
+            high -= probs[-1]
+            e = 0.01 * high
+        probs.append(high)
+        return probs
+    else:
+        probs = self.genAlgo.geneticAlgorithm(probsCount=probsCount, goalValue=returnCoef, debug=debug)
+        return probs</code></pre>
+</details>
+</dd>
+<dt id="backend.Bandit.OneHandBandit.genTurnProbabilities"><code class="name flex">
+<span>def <span class="ident">genTurnProbabilities</span></span>(<span>self, rolledPicturesIdxs: List[int, ...]) ‑> List</span>
+</code></dt>
+<dd>
+<div class="desc"><p>функція, яка обраховує ймовірності для зображень у автоматі при генерації одного стовпчика,
+точніше описано в файлі README.ipynb</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>rolledPicturesIdxs</code></strong></dt>
+<dd>зображення, які уже були згенеровані у рядках одного стовпчика</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>значення ймовірностей для наступної генерації</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def genTurnProbabilities(self, rolledPicturesIdxs: List[int, ...]) -&gt; List:
+    &#34;&#34;&#34;функція, яка обраховує ймовірності для зображень у автоматі при генерації одного стовпчика,
+    точніше описано в файлі README.ipynb
+
+    Args:
+      rolledPicturesIdxs: зображення, які уже були згенеровані у рядках одного стовпчика
+
+    Returns:
+      значення ймовірностей для наступної генерації
+
+    &#34;&#34;&#34;
+    newProbs = np.array(self.probabilities, dtype=float)
+    divideCoeff = 1 - sum([self.probabilities[idx] for idx in rolledPicturesIdxs])
+    newProbs[rolledPicturesIdxs] = 0.0
+    newProbs = newProbs / divideCoeff
+    return list(newProbs)</code></pre>
+</details>
+</dd>
+<dt id="backend.Bandit.OneHandBandit.getColumn"><code class="name flex">
+<span>def <span class="ident">getColumn</span></span>(<span>self, j)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>функція, яка повертаю j-ий стовпець матриці self.state(матриці однієї гри)</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>j</code></strong></dt>
+<dd>індекс стовпця матриці гри</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>список індексів зображень</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def getColumn(self, j):
+    &#34;&#34;&#34;функція, яка повертаю j-ий стовпець матриці self.state(матриці однієї гри)
+
+    Args:
+      j: індекс стовпця матриці гри
+
+    Returns:
+      список індексів зображень
+
+    &#34;&#34;&#34;
+    return self.state[j]</code></pre>
+</details>
+</dd>
+<dt id="backend.Bandit.OneHandBandit.getReturnCoef"><code class="name flex">
+<span>def <span class="ident">getReturnCoef</span></span>(<span>self, gamesCount: int = 10000, probs: Optional[List[float, ...]] = None, isGraph: bool = False) ‑> Union[float, List[float]]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>функція, яка рахує коефіцієнт віддачі автомата, моделюючи методом Монте-Карло gamesCount ігор.</p>
+<p>функція рахує середній виграш гравця, протягом gamesCount ігор, та ділить його на ціну однієї гри</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>gamesCount</code></strong></dt>
+<dd>кількість ігор, які будуть промодельовані</dd>
+<dt><strong><code>probs</code></strong></dt>
+<dd>ймовірності зображень, з якими буде проводитись кожна гра</dd>
+<dt><strong><code>isGraph</code></strong></dt>
+<dd>параметр, який відповідає за надання функцією додаткових даних необхідних для створення графіку</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>коефіцієнт віддачі автомату, якщо isGraph рівне False</p>
+<p>список коефіцієнтів віддачі автомату для кожної гри, якщо isGraph рівне True</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def getReturnCoef(self, gamesCount: int = 10 ** 4, probs: Optional[List[float, ...]] = None,
+                  isGraph: bool = False) -&gt; Union[float, List[float]]:
+    &#34;&#34;&#34;функція, яка рахує коефіцієнт віддачі автомата, моделюючи методом Монте-Карло gamesCount ігор.
+
+    функція рахує середній виграш гравця, протягом gamesCount ігор, та ділить його на ціну однієї гри
+
+    Args:
+      gamesCount: кількість ігор, які будуть промодельовані
+      probs: ймовірності зображень, з якими буде проводитись кожна гра
+      isGraph: параметр, який відповідає за надання функцією додаткових даних необхідних для створення графіку
+
+    Returns:
+        коефіцієнт віддачі автомату, якщо isGraph рівне False
+
+        список коефіцієнтів віддачі автомату для кожної гри, якщо isGraph рівне True
+
+    &#34;&#34;&#34;
+    oldProbs = self.probabilities
+    oldMoneySpent = self.moneySpent
+    oldMoneyWon = self.moneyWon
+    if probs is not None:
+        self.setProbabilities(probs)
+    self.moneyWon = 0
+    self.moneySpent = 0
+
+    money = self.price * gamesCount
+
+    modeling = True
+    self.startGame(money, modeling=modeling)
+    meanRCs = self.play(gamesCount, modeling=modeling, isGraph=isGraph)
+    gameReturn = self.moneyWon
+    gameReturnPercentage = gameReturn / self.moneySpent
+    if probs is not None:
+        self.setProbabilities(oldProbs)
+    self.moneyWon = oldMoneyWon
+    self.moneySpent = oldMoneySpent
+    if isGraph:
+        return meanRCs
+
+    return gameReturnPercentage</code></pre>
+</details>
+</dd>
+<dt id="backend.Bandit.OneHandBandit.getReturnCoefWithNCores"><code class="name flex">
+<span>def <span class="ident">getReturnCoefWithNCores</span></span>(<span>self, gamesCount: int = 1000, probs: Optional[List[float, ...]] = None, coresCount: int = -1)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>функція, яка прискорює обчислення коефіцієнту віддачі автомату для великої кількості ігор,
+шляхом розпаралелювання роботи.</p>
+<p>функція запускає coresCount процесів, де виконуються функції self.getReturnCoef,
+але для меншого значення gamesCount, рівному gamesCount // coresCount.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>gamesCount</code></strong></dt>
+<dd>кількість ігор, які будуть промодельовані</dd>
+<dt><strong><code>probs</code></strong></dt>
+<dd>ймовірності зображень, з якими буде проводитись кожна гра</dd>
+<dt><strong><code>coresCount</code></strong></dt>
+<dd>кількість процесів, які запустить дана функція</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>коефіцієнт віддачі автомату</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def getReturnCoefWithNCores(self, gamesCount: int = 10 ** 3, probs: Optional[List[float, ...]] = None,
+                            coresCount: int = -1):
+    &#34;&#34;&#34;функція, яка прискорює обчислення коефіцієнту віддачі автомату для великої кількості ігор,
+    шляхом розпаралелювання роботи.
+
+    функція запускає coresCount процесів, де виконуються функції self.getReturnCoef,
+    але для меншого значення gamesCount, рівному gamesCount // coresCount.
+
+    Args:
+      gamesCount: кількість ігор, які будуть промодельовані
+      probs: ймовірності зображень, з якими буде проводитись кожна гра
+      coresCount: кількість процесів, які запустить дана функція
+
+    Returns:
+      коефіцієнт віддачі автомату
+
+    &#34;&#34;&#34;
+    if coresCount == -1:
+        coresCount = int(os.cpu_count() * 0.75)
+        if coresCount == 0:
+            coresCount = 1
+    elif coresCount == 0:
+        return self.getReturnCoef(gamesCount, probs)
+
+    gamesCountList = [gamesCount // coresCount, ] * coresCount
+    gamesCountList[-1] += (gamesCount - sum(gamesCountList))
+
+    args = zip(gamesCountList, [probs, ] * len(gamesCountList), )
+    # args = list(args)
+
+    with Pool(processes=coresCount) as executor:
+        results = executor.starmap(self.getReturnCoef, args)
+
+    res = sum(results) / coresCount
+    return res</code></pre>
+</details>
+</dd>
+<dt id="backend.Bandit.OneHandBandit.getRow"><code class="name flex">
+<span>def <span class="ident">getRow</span></span>(<span>self, i) ‑> <built-in function array></span>
+</code></dt>
+<dd>
+<div class="desc"><p>функція, яка повертає і-ий рядок матриці self.state(матриці однієї гри)</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>i</code></strong></dt>
+<dd>індекс рядка матриці гри</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>список індексів зображень</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def getRow(self, i) -&gt; np.array:
+    &#34;&#34;&#34;функція, яка повертає і-ий рядок матриці self.state(матриці однієї гри)
+
+    Args:
+      i: індекс рядка матриці гри
+
+    Returns:
+      список індексів зображень
+
+    &#34;&#34;&#34;
+    return np.array([self.state[j][i] for j in range(self.columnsNumb)])</code></pre>
+</details>
+</dd>
+<dt id="backend.Bandit.OneHandBandit.getState"><code class="name flex">
+<span>def <span class="ident">getState</span></span>(<span>self) ‑> <built-in function array></span>
+</code></dt>
+<dd>
+<div class="desc"><p>функція, яка повертає матрицю self.state(матрицю однієї гри)</p>
+<p>Args:</p>
+<h2 id="returns">Returns</h2>
+<p>транспонована(задля спрощення її відображення) матриця self.state</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def getState(self) -&gt; np.array:
+    &#34;&#34;&#34;функція, яка повертає матрицю self.state(матрицю однієї гри)
+
+    Args:
+
+    Returns:
+      транспонована(задля спрощення її відображення) матриця self.state
+
+    &#34;&#34;&#34;
+    return np.array(self.state).T</code></pre>
+</details>
+</dd>
+<dt id="backend.Bandit.OneHandBandit.play"><code class="name flex">
+<span>def <span class="ident">play</span></span>(<span>self, n, modeling: bool = False, isGraph: bool = False) ‑> Union[List[int], None, List[float]]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>функція, яка проводить n ігор</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>n</code></strong></dt>
+<dd>кількість ігор</dd>
+<dt><strong><code>modeling</code></strong></dt>
+<dd>параметр, який впливає на інформативність функції</dd>
+<dt><strong><code>isGraph</code></strong></dt>
+<dd>параметра, який керує поверненням спеціальних значень</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>список виграшів гравця за n ігор, якщо isGraph рівне False</p>
+<p>список коефіцієнтів віддачі автомату для кожної з n ігор, якщо isGraph рівне True</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def play(self, n, modeling: bool = False, isGraph: bool = False) -&gt; Union[Optional[List[int,]],
+                                                                          List[float]]:
+    &#34;&#34;&#34;функція, яка проводить n ігор
+
+    Args:
+      n: кількість ігор
+      modeling: параметр, який впливає на інформативність функції
+      isGraph: параметра, який керує поверненням спеціальних значень
+
+    Returns:
+      список виграшів гравця за n ігор, якщо isGraph рівне False
+
+      список коефіцієнтів віддачі автомату для кожної з n ігор, якщо isGraph рівне True
+
+    &#34;&#34;&#34;
+    if self.money &lt; self.price * n:
+        print(&#34;Not enough money&#34;)
+        return None
+
+    wons = []
+    meanRCs = []
+    # play game n times
+    for i in range(n):
+        won = self.currentTurn(modeling=modeling)
+        wons.append(won)
+        if not modeling:
+            print(f&#34;you won {won} money for one turn&#34;)
+            print(f&#34;you spent {self.price} money for one turn&#34;)
+            print()
+
+        if isGraph:
+            meanRCs.append(sum(wons) / ((i + 1) * self.price))
+
+    if isGraph:
+        return meanRCs
+
+    if not modeling:
+        return wons</code></pre>
+</details>
+</dd>
+<dt id="backend.Bandit.OneHandBandit.printState"><code class="name flex">
+<span>def <span class="ident">printState</span></span>(<span>self) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>функція, яка відображає матрицю поточної гри, весь виграш гравця, гроші, які у нього залишилися</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def printState(self) -&gt; None:
+    &#34;&#34;&#34;функція, яка відображає матрицю поточної гри, весь виграш гравця, гроші, які у нього залишилися&#34;&#34;&#34;
+    print(f&#34;current state: \n{self.getState()}&#34;)
+    # print(&#34;money spent:&#34;, self.moneySpent)
+    print(&#34;money won:&#34;, self.moneyWon)
+    print(&#34;money remained:&#34;, self.money)</code></pre>
+</details>
+</dd>
+<dt id="backend.Bandit.OneHandBandit.setPriceOfGame"><code class="name flex">
+<span>def <span class="ident">setPriceOfGame</span></span>(<span>self, price) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>функція, яка встановлює вартість однієї гри</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>price</code></strong></dt>
+<dd>вартість однієї гри</dd>
+</dl>
+<p>Returns:</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def setPriceOfGame(self, price) -&gt; None:
+    &#34;&#34;&#34;функція, яка встановлює вартість однієї гри
+
+    Args:
+      price: вартість однієї гри
+
+    Returns:
+
+    &#34;&#34;&#34;
+    self.price = price</code></pre>
+</details>
+</dd>
+<dt id="backend.Bandit.OneHandBandit.setProbabilities"><code class="name flex">
+<span>def <span class="ident">setProbabilities</span></span>(<span>self, probs: Optional[List[float, ...]] = None) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>функція, яка встановлює ймовірності для відповідних зображень з індексами від 0 до self.picturesNumb - 1,
+слідкуючи за тим, щоб сума ймовірностей була рівною одиниці</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>probs</code></strong></dt>
+<dd>ймовірності зображень</dd>
+</dl>
+<p>Returns:</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def setProbabilities(self, probs: Optional[List[float, ...]] = None) -&gt; None:
+    &#34;&#34;&#34;функція, яка встановлює ймовірності для відповідних зображень з індексами від 0 до self.picturesNumb - 1,
+    слідкуючи за тим, щоб сума ймовірностей була рівною одиниці
+
+    Args:
+      probs: ймовірності зображень
+
+    Returns:
+
+    &#34;&#34;&#34;
+    if probs is None:
+        # uniform distribution
+        probs = [1 / self.picturesNumb for i in range(self.picturesNumb)]
+
+    if 0.001 &lt; abs(sum(probs) - 1.0):
+        # sum of probs dont equal 1
+        raise ProbabilitiesSumException
+
+    if len(probs) != self.picturesNumb:
+        raise ProbabilitiesArrayLengthException
+
+    self.probabilities = probs.copy()</code></pre>
+</details>
+</dd>
+<dt id="backend.Bandit.OneHandBandit.setProbabilitiesFromTxtFile"><code class="name flex">
+<span>def <span class="ident">setProbabilitiesFromTxtFile</span></span>(<span>self, filename: str = 'probabilities.txt') ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>функція, яка читає ймовірності з файлу, які розділені одним пробілом та визиває функцію self.setProbabilities</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>filename</code></strong></dt>
+<dd>ім'я файлу з ймовірностями</dd>
+</dl>
+<p>Returns:</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def setProbabilitiesFromTxtFile(self, filename: str = &#34;probabilities.txt&#34;) -&gt; None:
+    &#34;&#34;&#34;функція, яка читає ймовірності з файлу, які розділені одним пробілом та визиває функцію self.setProbabilities
+
+    Args:
+      filename: ім&#39;я файлу з ймовірностями
+
+    Returns:
+
+    &#34;&#34;&#34;
+    with open(filename, &#34;r&#34;) as f:
+        probsLine = f.readline()
+        probs = list(map(lambda x: float(x), probsLine.split(&#34; &#34;)))
+
+    self.setProbabilities(probs)</code></pre>
+</details>
+</dd>
+<dt id="backend.Bandit.OneHandBandit.setState"><code class="name flex">
+<span>def <span class="ident">setState</span></span>(<span>self, state: List[List[int,],]) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>функція, яка встановлює матрицю однієї гри</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>state</code></strong></dt>
+<dd>матриця індексів зображень однієї гри</dd>
+</dl>
+<p>Returns:</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def setState(self, state: List[List[int,],]) -&gt; None:
+    &#34;&#34;&#34;функція, яка встановлює матрицю однієї гри
+
+    Args:
+      state: матриця індексів зображень однієї гри
+
+    Returns:
+
+    &#34;&#34;&#34;
+    if all([len(col) == len(set(col)) for col in state]):
+        self.state = state
+    else:
+        raise SettingStateException</code></pre>
+</details>
+</dd>
+<dt id="backend.Bandit.OneHandBandit.setWinningCombs"><code class="name flex">
+<span>def <span class="ident">setWinningCombs</span></span>(<span>self, combs: Dict[Tuple[int, ...], int])</span>
+</code></dt>
+<dd>
+<div class="desc"><p>функція, яка встановлює виграшні комбінації</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>combs</code></strong></dt>
+<dd>
+<p>dict of winning combinations</p>
+<p>example: { (7, 7, 7): 100, (3, 5, 7): 200, (4, 3, 0): 500 }</p>
+</dd>
+</dl>
+<p>Returns:</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def setWinningCombs(self, combs: Dict[Tuple[int, ...], int]):
+    &#34;&#34;&#34;функція, яка встановлює виграшні комбінації
+
+    Args:
+      combs: dict of winning combinations
+
+        example: { (7, 7, 7): 100, (3, 5, 7): 200, (4, 3, 0): 500 }
+
+    Returns:
+
+    &#34;&#34;&#34;
+    combs = combs.copy()
+    for comb in combs:
+        if len(comb) != self.columnsNumb:
+            raise CombinationLengthException
+        elif max(comb) &gt; (self.picturesNumb - 1) or min(comb) &lt; 0:
+            raise CombinationValuesException
+        elif combs[comb] &lt; 0:
+            raise WinningMoneyException
+
+    self.combinations = combs</code></pre>
+</details>
+</dd>
+<dt id="backend.Bandit.OneHandBandit.startGame"><code class="name flex">
+<span>def <span class="ident">startGame</span></span>(<span>self, money: int, modeling: bool = False) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>функція, яка вносить до автомату певну суму грошей, на які можна грати</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>money</code></strong></dt>
+<dd>сума грошей, яка вноситься до автомату</dd>
+<dt><strong><code>modeling</code></strong></dt>
+<dd>параметр, який регулює інформативність функції</dd>
+</dl>
+<p>Returns:</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def startGame(self, money: int, modeling: bool = False) -&gt; None:
+    &#34;&#34;&#34;функція, яка вносить до автомату певну суму грошей, на які можна грати
+
+    Args:
+      money: сума грошей, яка вноситься до автомату
+      modeling: параметр, який регулює інформативність функції
+
+    Returns:
+
+    &#34;&#34;&#34;
+    if money &gt; 0:
+        self.money = money
+        if not modeling:
+            print(f&#34;you deposited {money} money&#34;)</code></pre>
+</details>
+</dd>
+<dt id="backend.Bandit.OneHandBandit.turnColumn"><code class="name flex">
+<span>def <span class="ident">turnColumn</span></span>(<span>self, i) ‑> List[int]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>функція, яка генерує один стовпець для майбутньої матриці однієї гри</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>i</code></strong></dt>
+<dd>індекс стовпця, який також відповідає індексу стовпця з self.drumColumns,
+де кожен стовпець містить індекси зображень, які взагалі можуть з'явитися в і-тому стовпці матриці однієї гри</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>список індексів зображень</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def turnColumn(self, i) -&gt; List[int,]:
+    &#34;&#34;&#34;функція, яка генерує один стовпець для майбутньої матриці однієї гри
+
+    Args:
+      i: індекс стовпця, який також відповідає індексу стовпця з self.drumColumns,
+         де кожен стовпець містить індекси зображень, які взагалі можуть з&#39;явитися в і-тому стовпці матриці однієї гри
+
+    Returns:
+      список індексів зображень
+
+    &#34;&#34;&#34;
+    downIdx = self.rowsNumb - 1
+    upIdx = 0
+    rolledPicturesIdx = []
+    resColumn = [-1, ] * self.rowsNumb
+    for idx in range(self.rowsNumb):
+        newProbs = self.genTurnProbabilities(rolledPicturesIdxs=rolledPicturesIdx)
+
+        # assert abs(sum(newProbs) - 1) &lt; 0.001
+
+        rolledPicIdx = np.random.choice(self.drumsColumns[i], size=1, p=newProbs)[0]
+        rolledPicturesIdx.append(rolledPicIdx)
+
+        if (idx % 2) == 0:
+            resColumn[downIdx] = rolledPicIdx
+            downIdx -= 1
+        else:
+            resColumn[upIdx] = rolledPicIdx
+            upIdx += 1
+
+    return resColumn</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="backend" href="index.html">backend</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="backend.Bandit.OneHandBandit" href="#backend.Bandit.OneHandBandit">OneHandBandit</a></code></h4>
+<ul class="">
+<li><code><a title="backend.Bandit.OneHandBandit.addWinningComb" href="#backend.Bandit.OneHandBandit.addWinningComb">addWinningComb</a></code></li>
+<li><code><a title="backend.Bandit.OneHandBandit.currentPlayerWon" href="#backend.Bandit.OneHandBandit.currentPlayerWon">currentPlayerWon</a></code></li>
+<li><code><a title="backend.Bandit.OneHandBandit.currentTurn" href="#backend.Bandit.OneHandBandit.currentTurn">currentTurn</a></code></li>
+<li><code><a title="backend.Bandit.OneHandBandit.currentWon" href="#backend.Bandit.OneHandBandit.currentWon">currentWon</a></code></li>
+<li><code><a title="backend.Bandit.OneHandBandit.genBaseProbabilities" href="#backend.Bandit.OneHandBandit.genBaseProbabilities">genBaseProbabilities</a></code></li>
+<li><code><a title="backend.Bandit.OneHandBandit.genTurnProbabilities" href="#backend.Bandit.OneHandBandit.genTurnProbabilities">genTurnProbabilities</a></code></li>
+<li><code><a title="backend.Bandit.OneHandBandit.getColumn" href="#backend.Bandit.OneHandBandit.getColumn">getColumn</a></code></li>
+<li><code><a title="backend.Bandit.OneHandBandit.getReturnCoef" href="#backend.Bandit.OneHandBandit.getReturnCoef">getReturnCoef</a></code></li>
+<li><code><a title="backend.Bandit.OneHandBandit.getReturnCoefWithNCores" href="#backend.Bandit.OneHandBandit.getReturnCoefWithNCores">getReturnCoefWithNCores</a></code></li>
+<li><code><a title="backend.Bandit.OneHandBandit.getRow" href="#backend.Bandit.OneHandBandit.getRow">getRow</a></code></li>
+<li><code><a title="backend.Bandit.OneHandBandit.getState" href="#backend.Bandit.OneHandBandit.getState">getState</a></code></li>
+<li><code><a title="backend.Bandit.OneHandBandit.play" href="#backend.Bandit.OneHandBandit.play">play</a></code></li>
+<li><code><a title="backend.Bandit.OneHandBandit.players" href="#backend.Bandit.OneHandBandit.players">players</a></code></li>
+<li><code><a title="backend.Bandit.OneHandBandit.printState" href="#backend.Bandit.OneHandBandit.printState">printState</a></code></li>
+<li><code><a title="backend.Bandit.OneHandBandit.setPriceOfGame" href="#backend.Bandit.OneHandBandit.setPriceOfGame">setPriceOfGame</a></code></li>
+<li><code><a title="backend.Bandit.OneHandBandit.setProbabilities" href="#backend.Bandit.OneHandBandit.setProbabilities">setProbabilities</a></code></li>
+<li><code><a title="backend.Bandit.OneHandBandit.setProbabilitiesFromTxtFile" href="#backend.Bandit.OneHandBandit.setProbabilitiesFromTxtFile">setProbabilitiesFromTxtFile</a></code></li>
+<li><code><a title="backend.Bandit.OneHandBandit.setState" href="#backend.Bandit.OneHandBandit.setState">setState</a></code></li>
+<li><code><a title="backend.Bandit.OneHandBandit.setWinningCombs" href="#backend.Bandit.OneHandBandit.setWinningCombs">setWinningCombs</a></code></li>
+<li><code><a title="backend.Bandit.OneHandBandit.startGame" href="#backend.Bandit.OneHandBandit.startGame">startGame</a></code></li>
+<li><code><a title="backend.Bandit.OneHandBandit.totalPlayersWon" href="#backend.Bandit.OneHandBandit.totalPlayersWon">totalPlayersWon</a></code></li>
+<li><code><a title="backend.Bandit.OneHandBandit.turnColumn" href="#backend.Bandit.OneHandBandit.turnColumn">turnColumn</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

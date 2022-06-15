@@ -1,0 +1,1484 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
+<meta name="generator" content="pdoc 0.10.0" />
+<title>backend.GenAlgorithm API documentation</title>
+<meta name="description" content="" />
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/sanitize.min.css" integrity="sha256-PK9q560IAAa6WVRRh76LtCaI8pjTJ2z11v0miyNNjrs=" crossorigin>
+<link rel="preload stylesheet" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/11.0.1/typography.min.css" integrity="sha256-7l/o7C8jubJiy74VsKTidCy1yBkRtiUGbVkYBylBqUg=" crossorigin>
+<link rel="stylesheet preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/github.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:30px;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:1em 0 .50em 0}h3{font-size:1.4em;margin:25px 0 10px 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .3s ease-in-out}a:hover{color:#e82}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900}pre code{background:#f8f8f8;font-size:.8em;line-height:1.4em}code{background:#f2f2f1;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{background:#f8f8f8;border:0;border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0;padding:1ex}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-weight:bold;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em .5em;margin-bottom:1em}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.item .name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul{padding-left:1.5em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js" integrity="sha256-Uv3H6lx7dJmRfRvH8TH6kJD1TSK1aFcwgx+mdg3epi8=" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => hljs.initHighlighting())</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>backend.GenAlgorithm</code></h1>
+</header>
+<section id="section-intro">
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">from typing import List, Iterable, Tuple, Union
+
+import numpy as np
+from scipy.stats import truncnorm
+from tqdm import tqdm
+
+
+class GeneticAlgorithm:
+    &#34;&#34;&#34; &#34;&#34;&#34;
+
+    def __init__(self, bandit):
+        from backend.Bandit import OneHandBandit
+        self.bandit: OneHandBandit = bandit
+
+    def geneticAlgorithm(self, probsCount: int, goalValue: float,
+                         populationSize: int = 6, population: List[List[float]] = None, gamesCount: int = 3000,
+                         generationsCount: int = 100, eps: float = 0.001, debug: bool = False,
+                         isGraph: bool = False) -&gt; np.array:
+        &#34;&#34;&#34;основний метод генетичного алгоритму, який який керує усіма іншими методами та повертає результат,
+        в виді списка ймовірностей
+
+        Args:
+          probsCount: довжина списку ймовірностей, який ви хотіли б отримати
+          goalValue: значення коефіцієнта віддачі, якого ви хотіли б досягти зі згенерованими ймовірностями
+          populationSize: розмір популяції генетичного алгоритму
+          population: список індивидів(списків з ймовірностями), які будуть використовуватись генетичним алгоритмом
+          gamesCount: кількість ігор, для функції обрахунку коефіцієнту віддачі,
+            яка надалі буде використовуватися функцією фітнесу(fitness_func)
+          generationsCount: максимальна кількість поколінь після, якої зупиниться генетичний алгоритм
+          eps: похибка, яку дозволяє поточний генетичний алгоритм:
+            генетичний алгоритм зупиниться,
+            якщо (коефіцієнт віддачі згенерованих ймовірностей) - goalValue буде менше за цю похибку)
+          debug: параметр, який регулює інформативність алгоритму:
+
+            якщо debug рівне False алгоритм не інформує про зміни в поколіннях
+
+            якщо debug рівне True алгоритм інформує про зміни в поколіннях
+          isGraph: параметр, який відповідає за надання функцією додаткових даних необхідних для створення графіку
+
+        Returns:
+          якщо isGraph рівне False: список ймовірностей,
+            які мають коефіцієнт віддачі рівним goalValue з певною похибкою eps
+          якщо isGraph рівне True: списки коефіцієнтів віддачі популяції у різних поколіннях
+
+        &#34;&#34;&#34;
+        if population is None:
+            population = []
+            for _ in range(populationSize):
+                population.append(np.array(self.bandit.genBaseProbabilities(probsCount)))
+
+            # population = [[0.34620235, 0.07168648, 0.06275534, 0.51076111, 0.00859472],
+            #               [0.48455469, 0.29974074, 0.18556755, 0.02237517, 0.00776185],
+            #               [0.4076457, 0.24869838, 0.14315961, 0.03328834000000005, 0.16720797],
+            #               [0.15385934, 0.64327094, 0.14050975, 0.03888020000000005, 0.02347977],
+            #               [0.32335616, 0.08463666, 0.28513406, 0.04416111, 0.26271201],
+            #               [0.43279837, 0.25248431, 0.05619025, 0.2325301, 0.02599697], ]
+            #               [0.39709205, 0.23165409, 0.0515545 , 0.24932884, 0.07037052], ]
+            # fitness coefs: 0.65333333, 0.677     , 0.80883333, 0.5645    , 0.81633333
+
+            # population = [[0.13124844, 0.47042438, 0.0631639 , 0.26138892, 0.07377436],
+            #               [0.0952308 , 0.65992553, 0.14414762, 0.03988682, 0.06080923],
+            #               [0.43279837, 0.25248431, 0.05619025, 0.2325301 , 0.02599697],
+            #               [0.26570799, 0.52636168, 0.11265015, 0.05940529, 0.03587489],
+            #               [0.39709205, 0.23165409, 0.0515545 , 0.24932884, 0.07037052], ]
+            # fitness coefs: 0.76933333, 0.56766667, 0.77983333, 0.72416667, 0.802
+
+        # цільова функція(фітнес функція) чим менше значення, тим більша ймовірність виживання індивіда
+        fitness = lambda probs: self.fitness_func(probs=probs, goalValue=goalValue, gamesCount=gamesCount,
+                                                  debug=debug, isGraph=isGraph)
+
+
+        fitnessVals = []
+        returnCoefsInGenerations = []
+        # if debug is True:
+        #     iterator = range(generationsCount)
+        # else:
+        #     iterator = tqdm(range(generationsCount))
+
+        # for generationIdx in tqdm(range(generationsCount)):
+        for generationIdx in range(generationsCount):
+            if debug is True:
+                print(&#34;\n######################generation:&#34;, generationIdx)
+
+            fitnessVals = np.array([fitness(ps) for ps in population])
+            if isGraph is True:
+                mass = fitnessVals.copy()
+                fitnessVals = np.array([i[1] for i in mass])
+                returnCoefsInGenerations.append([i[0] for i in mass])
+
+            if debug is True:
+                print(f&#34;{fitnessVals=}\n&#34;)
+
+            # Обчислення коефіцієнту виживання кожного індивіду
+            surviveProbs = self.getSurviveProbs(fitnessVals)
+            # print(f&#34;{surviveProbs=}\n&#34;)
+
+            # Перевірка умов зупинки Генетичного Алгоритму
+            if any(fitnessVals &lt;= eps):
+                if debug is True:
+                    print(&#34;\n-----------------fitness values to break cycle:&#34;, fitnessVals)
+                break
+
+            # Відбір
+            population = self.selection(population, surviveProbs)
+
+            # Скрещування
+            population = self.crossOver(population)
+            for idx in range(len(population)):
+                self.changeProbs(population[idx])
+
+            # Мутація
+            # ймовірність мутації кожної особини
+            mutateProb = 0.2
+            for idx in range(len(population)):
+                rNumb = np.random.choice([0, 1], size=1, p=[1 - mutateProb, mutateProb])[0]
+                if rNumb:
+                    self.mutatePerson(population[idx], indpb=1 / len(population[idx]), debug=debug)
+
+        if isGraph is True:
+            return returnCoefsInGenerations
+
+        mass = sorted(list(zip(fitnessVals, range(len(fitnessVals)))), key=lambda x: x[0])
+        population = [population[i[1]] for i in mass]
+        return population[0]
+
+    # @benchmark
+    def fitness_func(self, probs: List[float,], goalValue: float, debug: bool = False, isGraph: bool = False,
+                     gamesCount: int = 5000) -&gt; Union[float, Tuple]:
+        &#34;&#34;&#34;функція обраховує значення функції фітнесу:
+        чим значення коефіцієнту віддачі ймовірностей probs ближче до goalValue, тим значення фітнес функції менше
+        і навпаки.
+
+        Args:
+          probs: ймовірності для яких необхідно порахувати значення фітнес функції
+          goalValue: значення коефіцієнту віддачі при якому рахується значення фітнес функція
+          debug: параметр, який регулює інформативність функції
+          gamesCount: кількість ігор, для функції обрахунку коефіцієнту віддачі
+          isGraph: параметр, який відповідає за надання функцією додаткових даних необхідних для створення графіку
+
+        Returns:
+          якщо isGraph рівне False: значення фітнес функції
+          якщо isGraph рівне True: (коефіцієнт віддачі, значення фітнес функції)
+
+        &#34;&#34;&#34;
+        currReturnCoef = self.bandit.getReturnCoefWithNCores(gamesCount=gamesCount, probs=probs, coresCount=-1)
+        # print(f&#34;\n{probs=}&#34;)
+        if debug is True:
+            print(f&#34;currFitness={abs(currReturnCoef - goalValue)}&#34;)
+            print(f&#34;{currReturnCoef=}\n&#34;)
+        if isGraph is True:
+            return currReturnCoef, abs(currReturnCoef - goalValue)
+
+        return abs(currReturnCoef - goalValue)
+
+    def getSurviveProbs(self, fitnessVals: np.array(List[Iterable[float]])) -&gt; np.array(List[Iterable[float]]):
+        &#34;&#34;&#34;функція обраховує ймовірність виживання кожної окремої особини з популяції
+
+        Args:
+          fitnessVals: список значень функції фітнесу особин для популяції
+
+        Returns:
+          список ймовірностей виживання особин з популяції, обрахованний на основі значень функції фітнесу
+
+        &#34;&#34;&#34;
+        fitnessVals[fitnessVals == 0] = 0.000001
+
+        invS = sum(1 / fitnessVals)
+        surviveProbs = (1 / fitnessVals) / invS
+        return surviveProbs
+
+    def selection(self, population: List[np.array,], surviveProbs):
+        &#34;&#34;&#34;функція реалізовує відбір методом рулетки для генетичного алгоритму
+
+        Args:
+          population: поточна популяція
+          surviveProbs: ймовірності виживання кожної особини з поточної популяції
+
+        Returns:
+          нова популяція, такого ж розміру, що і стара, але без відсіяних особин
+
+        &#34;&#34;&#34;
+        #
+        indices = list(np.random.choice(range(len(population)), size=len(population), p=surviveProbs))
+        newPopulation = list(np.array(population)[indices])
+        return newPopulation
+
+    def crossOver(self, population):
+        &#34;&#34;&#34;функція формує сім&#39;ї(списки по дві особини) з поточної популяції, які потім передає у функцію скрещування
+
+        Args:
+          population: поточна популяція
+
+        Returns:
+          нова популяція, такого ж розміру, як і  стара, але з особин утворених в результаті скрещювання
+
+        &#34;&#34;&#34;
+        # len(population) повинно бути парним
+
+        # N = (len(population) // 2) * 2
+        N = len(population)
+        families = [population[i: (i + 2)] for i in range(0, N, 2)]
+        # if len(population) % 2 == 1:
+        #     families.append([population[-1], population[0]])
+
+        # ймовірність скрещування
+        crossOverProb = 0.9
+        successors = [self.getSuccessor(f, crossOverProb) for f in families]
+        newPopulation = []
+        for i in successors:
+            newPopulation.extend(i)
+
+        return newPopulation
+
+    def getSuccessor(self, family: np.array(np.array(List[Iterable[float]])), crossOverProb: float):
+        &#34;&#34;&#34;функціє реалізує одноточкове скрещування для генетичного алгоритму
+
+        Args:
+          family: список з двох особин для скрещування
+          crossOverProb: ймовірність скрещювання(досить велика ймовірність)
+
+        Returns:
+          повертає двох особин:
+
+          якщо скрещування відбулось: повертаються нові особини, які є результатом скрещювання
+
+          якщо скрещування не відбулось: повертаються батьки(список family)
+
+        &#34;&#34;&#34;
+        parent1, parent2 = family
+        gensCount = len(parent1)
+
+        # low border is inclusive, high border is exclusive
+        splitIdx = np.random.randint(1, gensCount)
+        # Х.-батько: a1 | b1,c1,d1; Х.-мати: a2 | b2,c2,d2; Х.-потомок: a1,b2,c2,d2
+        successor1 = np.array(list(parent1[: splitIdx]) + list(parent2[splitIdx:]))
+
+        # Х.-батько: a1 | b1,c1,d1; Х.-мати: a2 | b2,c2,d2; Х.-потомок: a2,b1,c1,d1
+        successor2 = np.array(list(parent2[: splitIdx]) + list(parent1[splitIdx:]))
+
+        # low border is inclusive, high border is exclusive
+        rIdx = np.random.choice([0, 1], size=1, p=[1 - crossOverProb, crossOverProb])[0]
+        if rIdx == 1:
+            self.changeProbs(successor1)
+            self.changeProbs(successor2)
+            return [successor1, successor2]
+        else:
+            return family
+
+    def mutatePerson(self, person: np.array, indpb: float = 0.01, delta: float = 1, debug: bool = False) -&gt; None:
+        &#34;&#34;&#34;функція реалізує мутацію певної особини для генетичного алгоритму,
+        де новий мутований ген вибирається,
+        як значення нормально розподіленої випадкової величини
+        з середнім рівним значенню поточного гену та дисперсією рівною одиничці
+
+        Args:
+          person: особина, яка буде піддана мутації
+          indpb: ймовірність мутації одного гена особини(однієї ймовірності)
+          delta: максимальна різниця між поточним геном та мутованим
+          debug: параметр, який регулює інформативність функції
+
+        Returns:
+
+        &#34;&#34;&#34;
+
+        def get_truncated_normal(mean=0, sd=1, low=0, upp=10):
+            &#34;&#34;&#34;
+
+            Args:
+              mean:  (Default value = 0)
+              sd:  (Default value = 1)
+              low:  (Default value = 0)
+              upp:  (Default value = 10)
+
+            Returns:
+
+            &#34;&#34;&#34;
+            return truncnorm(
+                (low - mean) / sd, (upp - mean) / sd, loc=mean, scale=sd)
+
+        person0 = person.copy()
+        for idx in range(len(person)):
+            if np.random.uniform() &lt;= indpb:
+                if debug is True:
+                    print(&#34;mutation of one gen in one person_________________&#34;)
+                leftBorder = max(0, person[idx] - delta)
+                rightBorder = min(1, person[idx] + delta)
+                # newGenVal = random.triangular(leftBorder, rightBorder, random.gauss(person[idx], 1))
+                newGenVal = get_truncated_normal(mean=person[idx], sd=1, low=leftBorder, upp=rightBorder).rvs()
+                if debug is True:
+                    print(f&#34;old {person=}&#34;)
+                    print(f&#34;old gen:{person[idx]}, new gen:{newGenVal}\n&#34;)
+                # newGenVal = np.random.uniform(low=leftBorder, high=rightBorder, size=1)[0]
+                person[idx] = newGenVal
+                self.changeProbs(person, indsNot2ch=[idx, ])
+
+                if debug is True:
+                    print(f&#34;new {person=}\n&#34;)
+
+                if any(person &lt; 0):
+                    print(f&#34;{person0=}&#34;)
+                    print(f&#34;{person=}&#34;)
+
+    def changeProbs(self, probs: np.array, eps: float = 0.0001, indsNot2ch: List[int] = None) -&gt; None:
+        &#34;&#34;&#34;якщо indsNot2ch порожній,
+        функція зменшує або збільшує кожну ймовірність з probs, для того, щоб сума була рівна 1
+
+        якщо indsNot2ch не порожній,
+        функція зменшує або збільшує всі ймовірності з probs, окрім тих ймовірностей,
+        чиї індексі зазначені у списку indsNot2ch, для того, щоб сума була рівна 1
+
+        Args:
+          probs: масив ймовірностей
+          eps: похибка, яку дозволяє функція
+          indsNot2ch: список індексів ймовірностей, які не можна змінювати
+
+        Returns:
+
+        &#34;&#34;&#34;
+        sVal = probs.sum()
+        value = abs(1 - sVal)
+
+        if value &lt; eps:
+            maxElIdx = max(zip(range(len(probs)), probs), key=lambda x: x[1])[0]
+            indices = list(range(len(probs)))
+            indices.remove(maxElIdx)
+
+            probs[maxElIdx] = (1 - probs[indices].sum())
+            return
+
+        if indsNot2ch is None:
+            inds2ch = list(range(len(probs)))
+        else:
+            inds2ch = [i for i in range(len(probs)) if i not in indsNot2ch]
+
+        if sVal &gt; 1:
+            self.decreaseProbs(probs, value, inds2ch)
+        else:
+            self.increaseProbs(probs, value, inds2ch)
+
+        # для того, щоб прибрати відхилення суми від одиниці, яке менше за eps
+        self.changeProbs(probs)
+
+    def decreaseProbs(self, probs: np.ndarray, value, inds2ch: List[int]) -&gt; None:
+        &#34;&#34;&#34;value не повинно бути більше за sum(probs)
+        зменшуємо кожне число пропорційно:
+
+        якщо індекс ймовірності знаходиться у списку inds2ch, то ймовірність не змінюється
+
+        якщо індекс ймовірності p0 не належить списку inds2ch
+        та ймовірність p0 становить 50% від суми всіх ймовірностей, то p0 зменшиться на 50% від числа value
+
+        Args:
+          probs: список ймовірностей
+          value: значення на яке сумарно треба зменшити ймовірності
+          inds2ch: список індексів ймовірностей, які не можна змінювати
+
+        Returns:
+
+        &#34;&#34;&#34;
+        s = sum(probs[inds2ch])
+        percents = probs[inds2ch] / s
+        percentVals = percents * value
+        probs[inds2ch] = probs[inds2ch] - percentVals
+
+    def increaseProbs(self, probs: np.ndarray, value, inds2ch: List[int]):
+        &#34;&#34;&#34;value не повинно бути більше за sum(probs)
+        збільшуємо кожне число пропорційно:
+
+        якщо індекс ймовірності знаходиться у списку inds2ch, то ймовірність не змінюється
+
+        якщо індекс ймовірності p0 не належить списку inds2ch
+        та ймовірність p0 становить 50% від суми всіх ймовірностей, то p0 збільшиться на 50% від числа value
+
+        Args:
+          probs: список ймовірностей
+          value: значення на яке сумарно треба зменшити ймовірності
+          inds2ch: список індексів ймовірностей, які не можна змінювати
+
+        Returns:
+
+        &#34;&#34;&#34;
+        s = sum(probs[inds2ch])
+        percents = probs[inds2ch] / s
+        percentVals = percents * value
+        probs[inds2ch] = probs[inds2ch] + percentVals</code></pre>
+</details>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="backend.GenAlgorithm.GeneticAlgorithm"><code class="flex name class">
+<span>class <span class="ident">GeneticAlgorithm</span></span>
+<span>(</span><span>bandit)</span>
+</code></dt>
+<dd>
+<div class="desc"></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class GeneticAlgorithm:
+    &#34;&#34;&#34; &#34;&#34;&#34;
+
+    def __init__(self, bandit):
+        from backend.Bandit import OneHandBandit
+        self.bandit: OneHandBandit = bandit
+
+    def geneticAlgorithm(self, probsCount: int, goalValue: float,
+                         populationSize: int = 6, population: List[List[float]] = None, gamesCount: int = 3000,
+                         generationsCount: int = 100, eps: float = 0.001, debug: bool = False,
+                         isGraph: bool = False) -&gt; np.array:
+        &#34;&#34;&#34;основний метод генетичного алгоритму, який який керує усіма іншими методами та повертає результат,
+        в виді списка ймовірностей
+
+        Args:
+          probsCount: довжина списку ймовірностей, який ви хотіли б отримати
+          goalValue: значення коефіцієнта віддачі, якого ви хотіли б досягти зі згенерованими ймовірностями
+          populationSize: розмір популяції генетичного алгоритму
+          population: список індивидів(списків з ймовірностями), які будуть використовуватись генетичним алгоритмом
+          gamesCount: кількість ігор, для функції обрахунку коефіцієнту віддачі,
+            яка надалі буде використовуватися функцією фітнесу(fitness_func)
+          generationsCount: максимальна кількість поколінь після, якої зупиниться генетичний алгоритм
+          eps: похибка, яку дозволяє поточний генетичний алгоритм:
+            генетичний алгоритм зупиниться,
+            якщо (коефіцієнт віддачі згенерованих ймовірностей) - goalValue буде менше за цю похибку)
+          debug: параметр, який регулює інформативність алгоритму:
+
+            якщо debug рівне False алгоритм не інформує про зміни в поколіннях
+
+            якщо debug рівне True алгоритм інформує про зміни в поколіннях
+          isGraph: параметр, який відповідає за надання функцією додаткових даних необхідних для створення графіку
+
+        Returns:
+          якщо isGraph рівне False: список ймовірностей,
+            які мають коефіцієнт віддачі рівним goalValue з певною похибкою eps
+          якщо isGraph рівне True: списки коефіцієнтів віддачі популяції у різних поколіннях
+
+        &#34;&#34;&#34;
+        if population is None:
+            population = []
+            for _ in range(populationSize):
+                population.append(np.array(self.bandit.genBaseProbabilities(probsCount)))
+
+            # population = [[0.34620235, 0.07168648, 0.06275534, 0.51076111, 0.00859472],
+            #               [0.48455469, 0.29974074, 0.18556755, 0.02237517, 0.00776185],
+            #               [0.4076457, 0.24869838, 0.14315961, 0.03328834000000005, 0.16720797],
+            #               [0.15385934, 0.64327094, 0.14050975, 0.03888020000000005, 0.02347977],
+            #               [0.32335616, 0.08463666, 0.28513406, 0.04416111, 0.26271201],
+            #               [0.43279837, 0.25248431, 0.05619025, 0.2325301, 0.02599697], ]
+            #               [0.39709205, 0.23165409, 0.0515545 , 0.24932884, 0.07037052], ]
+            # fitness coefs: 0.65333333, 0.677     , 0.80883333, 0.5645    , 0.81633333
+
+            # population = [[0.13124844, 0.47042438, 0.0631639 , 0.26138892, 0.07377436],
+            #               [0.0952308 , 0.65992553, 0.14414762, 0.03988682, 0.06080923],
+            #               [0.43279837, 0.25248431, 0.05619025, 0.2325301 , 0.02599697],
+            #               [0.26570799, 0.52636168, 0.11265015, 0.05940529, 0.03587489],
+            #               [0.39709205, 0.23165409, 0.0515545 , 0.24932884, 0.07037052], ]
+            # fitness coefs: 0.76933333, 0.56766667, 0.77983333, 0.72416667, 0.802
+
+        # цільова функція(фітнес функція) чим менше значення, тим більша ймовірність виживання індивіда
+        fitness = lambda probs: self.fitness_func(probs=probs, goalValue=goalValue, gamesCount=gamesCount,
+                                                  debug=debug, isGraph=isGraph)
+
+
+        fitnessVals = []
+        returnCoefsInGenerations = []
+        # if debug is True:
+        #     iterator = range(generationsCount)
+        # else:
+        #     iterator = tqdm(range(generationsCount))
+
+        # for generationIdx in tqdm(range(generationsCount)):
+        for generationIdx in range(generationsCount):
+            if debug is True:
+                print(&#34;\n######################generation:&#34;, generationIdx)
+
+            fitnessVals = np.array([fitness(ps) for ps in population])
+            if isGraph is True:
+                mass = fitnessVals.copy()
+                fitnessVals = np.array([i[1] for i in mass])
+                returnCoefsInGenerations.append([i[0] for i in mass])
+
+            if debug is True:
+                print(f&#34;{fitnessVals=}\n&#34;)
+
+            # Обчислення коефіцієнту виживання кожного індивіду
+            surviveProbs = self.getSurviveProbs(fitnessVals)
+            # print(f&#34;{surviveProbs=}\n&#34;)
+
+            # Перевірка умов зупинки Генетичного Алгоритму
+            if any(fitnessVals &lt;= eps):
+                if debug is True:
+                    print(&#34;\n-----------------fitness values to break cycle:&#34;, fitnessVals)
+                break
+
+            # Відбір
+            population = self.selection(population, surviveProbs)
+
+            # Скрещування
+            population = self.crossOver(population)
+            for idx in range(len(population)):
+                self.changeProbs(population[idx])
+
+            # Мутація
+            # ймовірність мутації кожної особини
+            mutateProb = 0.2
+            for idx in range(len(population)):
+                rNumb = np.random.choice([0, 1], size=1, p=[1 - mutateProb, mutateProb])[0]
+                if rNumb:
+                    self.mutatePerson(population[idx], indpb=1 / len(population[idx]), debug=debug)
+
+        if isGraph is True:
+            return returnCoefsInGenerations
+
+        mass = sorted(list(zip(fitnessVals, range(len(fitnessVals)))), key=lambda x: x[0])
+        population = [population[i[1]] for i in mass]
+        return population[0]
+
+    # @benchmark
+    def fitness_func(self, probs: List[float,], goalValue: float, debug: bool = False, isGraph: bool = False,
+                     gamesCount: int = 5000) -&gt; Union[float, Tuple]:
+        &#34;&#34;&#34;функція обраховує значення функції фітнесу:
+        чим значення коефіцієнту віддачі ймовірностей probs ближче до goalValue, тим значення фітнес функції менше
+        і навпаки.
+
+        Args:
+          probs: ймовірності для яких необхідно порахувати значення фітнес функції
+          goalValue: значення коефіцієнту віддачі при якому рахується значення фітнес функція
+          debug: параметр, який регулює інформативність функції
+          gamesCount: кількість ігор, для функції обрахунку коефіцієнту віддачі
+          isGraph: параметр, який відповідає за надання функцією додаткових даних необхідних для створення графіку
+
+        Returns:
+          якщо isGraph рівне False: значення фітнес функції
+          якщо isGraph рівне True: (коефіцієнт віддачі, значення фітнес функції)
+
+        &#34;&#34;&#34;
+        currReturnCoef = self.bandit.getReturnCoefWithNCores(gamesCount=gamesCount, probs=probs, coresCount=-1)
+        # print(f&#34;\n{probs=}&#34;)
+        if debug is True:
+            print(f&#34;currFitness={abs(currReturnCoef - goalValue)}&#34;)
+            print(f&#34;{currReturnCoef=}\n&#34;)
+        if isGraph is True:
+            return currReturnCoef, abs(currReturnCoef - goalValue)
+
+        return abs(currReturnCoef - goalValue)
+
+    def getSurviveProbs(self, fitnessVals: np.array(List[Iterable[float]])) -&gt; np.array(List[Iterable[float]]):
+        &#34;&#34;&#34;функція обраховує ймовірність виживання кожної окремої особини з популяції
+
+        Args:
+          fitnessVals: список значень функції фітнесу особин для популяції
+
+        Returns:
+          список ймовірностей виживання особин з популяції, обрахованний на основі значень функції фітнесу
+
+        &#34;&#34;&#34;
+        fitnessVals[fitnessVals == 0] = 0.000001
+
+        invS = sum(1 / fitnessVals)
+        surviveProbs = (1 / fitnessVals) / invS
+        return surviveProbs
+
+    def selection(self, population: List[np.array,], surviveProbs):
+        &#34;&#34;&#34;функція реалізовує відбір методом рулетки для генетичного алгоритму
+
+        Args:
+          population: поточна популяція
+          surviveProbs: ймовірності виживання кожної особини з поточної популяції
+
+        Returns:
+          нова популяція, такого ж розміру, що і стара, але без відсіяних особин
+
+        &#34;&#34;&#34;
+        #
+        indices = list(np.random.choice(range(len(population)), size=len(population), p=surviveProbs))
+        newPopulation = list(np.array(population)[indices])
+        return newPopulation
+
+    def crossOver(self, population):
+        &#34;&#34;&#34;функція формує сім&#39;ї(списки по дві особини) з поточної популяції, які потім передає у функцію скрещування
+
+        Args:
+          population: поточна популяція
+
+        Returns:
+          нова популяція, такого ж розміру, як і  стара, але з особин утворених в результаті скрещювання
+
+        &#34;&#34;&#34;
+        # len(population) повинно бути парним
+
+        # N = (len(population) // 2) * 2
+        N = len(population)
+        families = [population[i: (i + 2)] for i in range(0, N, 2)]
+        # if len(population) % 2 == 1:
+        #     families.append([population[-1], population[0]])
+
+        # ймовірність скрещування
+        crossOverProb = 0.9
+        successors = [self.getSuccessor(f, crossOverProb) for f in families]
+        newPopulation = []
+        for i in successors:
+            newPopulation.extend(i)
+
+        return newPopulation
+
+    def getSuccessor(self, family: np.array(np.array(List[Iterable[float]])), crossOverProb: float):
+        &#34;&#34;&#34;функціє реалізує одноточкове скрещування для генетичного алгоритму
+
+        Args:
+          family: список з двох особин для скрещування
+          crossOverProb: ймовірність скрещювання(досить велика ймовірність)
+
+        Returns:
+          повертає двох особин:
+
+          якщо скрещування відбулось: повертаються нові особини, які є результатом скрещювання
+
+          якщо скрещування не відбулось: повертаються батьки(список family)
+
+        &#34;&#34;&#34;
+        parent1, parent2 = family
+        gensCount = len(parent1)
+
+        # low border is inclusive, high border is exclusive
+        splitIdx = np.random.randint(1, gensCount)
+        # Х.-батько: a1 | b1,c1,d1; Х.-мати: a2 | b2,c2,d2; Х.-потомок: a1,b2,c2,d2
+        successor1 = np.array(list(parent1[: splitIdx]) + list(parent2[splitIdx:]))
+
+        # Х.-батько: a1 | b1,c1,d1; Х.-мати: a2 | b2,c2,d2; Х.-потомок: a2,b1,c1,d1
+        successor2 = np.array(list(parent2[: splitIdx]) + list(parent1[splitIdx:]))
+
+        # low border is inclusive, high border is exclusive
+        rIdx = np.random.choice([0, 1], size=1, p=[1 - crossOverProb, crossOverProb])[0]
+        if rIdx == 1:
+            self.changeProbs(successor1)
+            self.changeProbs(successor2)
+            return [successor1, successor2]
+        else:
+            return family
+
+    def mutatePerson(self, person: np.array, indpb: float = 0.01, delta: float = 1, debug: bool = False) -&gt; None:
+        &#34;&#34;&#34;функція реалізує мутацію певної особини для генетичного алгоритму,
+        де новий мутований ген вибирається,
+        як значення нормально розподіленої випадкової величини
+        з середнім рівним значенню поточного гену та дисперсією рівною одиничці
+
+        Args:
+          person: особина, яка буде піддана мутації
+          indpb: ймовірність мутації одного гена особини(однієї ймовірності)
+          delta: максимальна різниця між поточним геном та мутованим
+          debug: параметр, який регулює інформативність функції
+
+        Returns:
+
+        &#34;&#34;&#34;
+
+        def get_truncated_normal(mean=0, sd=1, low=0, upp=10):
+            &#34;&#34;&#34;
+
+            Args:
+              mean:  (Default value = 0)
+              sd:  (Default value = 1)
+              low:  (Default value = 0)
+              upp:  (Default value = 10)
+
+            Returns:
+
+            &#34;&#34;&#34;
+            return truncnorm(
+                (low - mean) / sd, (upp - mean) / sd, loc=mean, scale=sd)
+
+        person0 = person.copy()
+        for idx in range(len(person)):
+            if np.random.uniform() &lt;= indpb:
+                if debug is True:
+                    print(&#34;mutation of one gen in one person_________________&#34;)
+                leftBorder = max(0, person[idx] - delta)
+                rightBorder = min(1, person[idx] + delta)
+                # newGenVal = random.triangular(leftBorder, rightBorder, random.gauss(person[idx], 1))
+                newGenVal = get_truncated_normal(mean=person[idx], sd=1, low=leftBorder, upp=rightBorder).rvs()
+                if debug is True:
+                    print(f&#34;old {person=}&#34;)
+                    print(f&#34;old gen:{person[idx]}, new gen:{newGenVal}\n&#34;)
+                # newGenVal = np.random.uniform(low=leftBorder, high=rightBorder, size=1)[0]
+                person[idx] = newGenVal
+                self.changeProbs(person, indsNot2ch=[idx, ])
+
+                if debug is True:
+                    print(f&#34;new {person=}\n&#34;)
+
+                if any(person &lt; 0):
+                    print(f&#34;{person0=}&#34;)
+                    print(f&#34;{person=}&#34;)
+
+    def changeProbs(self, probs: np.array, eps: float = 0.0001, indsNot2ch: List[int] = None) -&gt; None:
+        &#34;&#34;&#34;якщо indsNot2ch порожній,
+        функція зменшує або збільшує кожну ймовірність з probs, для того, щоб сума була рівна 1
+
+        якщо indsNot2ch не порожній,
+        функція зменшує або збільшує всі ймовірності з probs, окрім тих ймовірностей,
+        чиї індексі зазначені у списку indsNot2ch, для того, щоб сума була рівна 1
+
+        Args:
+          probs: масив ймовірностей
+          eps: похибка, яку дозволяє функція
+          indsNot2ch: список індексів ймовірностей, які не можна змінювати
+
+        Returns:
+
+        &#34;&#34;&#34;
+        sVal = probs.sum()
+        value = abs(1 - sVal)
+
+        if value &lt; eps:
+            maxElIdx = max(zip(range(len(probs)), probs), key=lambda x: x[1])[0]
+            indices = list(range(len(probs)))
+            indices.remove(maxElIdx)
+
+            probs[maxElIdx] = (1 - probs[indices].sum())
+            return
+
+        if indsNot2ch is None:
+            inds2ch = list(range(len(probs)))
+        else:
+            inds2ch = [i for i in range(len(probs)) if i not in indsNot2ch]
+
+        if sVal &gt; 1:
+            self.decreaseProbs(probs, value, inds2ch)
+        else:
+            self.increaseProbs(probs, value, inds2ch)
+
+        # для того, щоб прибрати відхилення суми від одиниці, яке менше за eps
+        self.changeProbs(probs)
+
+    def decreaseProbs(self, probs: np.ndarray, value, inds2ch: List[int]) -&gt; None:
+        &#34;&#34;&#34;value не повинно бути більше за sum(probs)
+        зменшуємо кожне число пропорційно:
+
+        якщо індекс ймовірності знаходиться у списку inds2ch, то ймовірність не змінюється
+
+        якщо індекс ймовірності p0 не належить списку inds2ch
+        та ймовірність p0 становить 50% від суми всіх ймовірностей, то p0 зменшиться на 50% від числа value
+
+        Args:
+          probs: список ймовірностей
+          value: значення на яке сумарно треба зменшити ймовірності
+          inds2ch: список індексів ймовірностей, які не можна змінювати
+
+        Returns:
+
+        &#34;&#34;&#34;
+        s = sum(probs[inds2ch])
+        percents = probs[inds2ch] / s
+        percentVals = percents * value
+        probs[inds2ch] = probs[inds2ch] - percentVals
+
+    def increaseProbs(self, probs: np.ndarray, value, inds2ch: List[int]):
+        &#34;&#34;&#34;value не повинно бути більше за sum(probs)
+        збільшуємо кожне число пропорційно:
+
+        якщо індекс ймовірності знаходиться у списку inds2ch, то ймовірність не змінюється
+
+        якщо індекс ймовірності p0 не належить списку inds2ch
+        та ймовірність p0 становить 50% від суми всіх ймовірностей, то p0 збільшиться на 50% від числа value
+
+        Args:
+          probs: список ймовірностей
+          value: значення на яке сумарно треба зменшити ймовірності
+          inds2ch: список індексів ймовірностей, які не можна змінювати
+
+        Returns:
+
+        &#34;&#34;&#34;
+        s = sum(probs[inds2ch])
+        percents = probs[inds2ch] / s
+        percentVals = percents * value
+        probs[inds2ch] = probs[inds2ch] + percentVals</code></pre>
+</details>
+<h3>Methods</h3>
+<dl>
+<dt id="backend.GenAlgorithm.GeneticAlgorithm.changeProbs"><code class="name flex">
+<span>def <span class="ident">changeProbs</span></span>(<span>self, probs: <built-in function array>, eps: float = 0.0001, indsNot2ch: List[int] = None) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>якщо indsNot2ch порожній,
+функція зменшує або збільшує кожну ймовірність з probs, для того, щоб сума була рівна 1</p>
+<p>якщо indsNot2ch не порожній,
+функція зменшує або збільшує всі ймовірності з probs, окрім тих ймовірностей,
+чиї індексі зазначені у списку indsNot2ch, для того, щоб сума була рівна 1</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>probs</code></strong></dt>
+<dd>масив ймовірностей</dd>
+<dt><strong><code>eps</code></strong></dt>
+<dd>похибка, яку дозволяє функція</dd>
+<dt><strong><code>indsNot2ch</code></strong></dt>
+<dd>список індексів ймовірностей, які не можна змінювати</dd>
+</dl>
+<p>Returns:</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def changeProbs(self, probs: np.array, eps: float = 0.0001, indsNot2ch: List[int] = None) -&gt; None:
+    &#34;&#34;&#34;якщо indsNot2ch порожній,
+    функція зменшує або збільшує кожну ймовірність з probs, для того, щоб сума була рівна 1
+
+    якщо indsNot2ch не порожній,
+    функція зменшує або збільшує всі ймовірності з probs, окрім тих ймовірностей,
+    чиї індексі зазначені у списку indsNot2ch, для того, щоб сума була рівна 1
+
+    Args:
+      probs: масив ймовірностей
+      eps: похибка, яку дозволяє функція
+      indsNot2ch: список індексів ймовірностей, які не можна змінювати
+
+    Returns:
+
+    &#34;&#34;&#34;
+    sVal = probs.sum()
+    value = abs(1 - sVal)
+
+    if value &lt; eps:
+        maxElIdx = max(zip(range(len(probs)), probs), key=lambda x: x[1])[0]
+        indices = list(range(len(probs)))
+        indices.remove(maxElIdx)
+
+        probs[maxElIdx] = (1 - probs[indices].sum())
+        return
+
+    if indsNot2ch is None:
+        inds2ch = list(range(len(probs)))
+    else:
+        inds2ch = [i for i in range(len(probs)) if i not in indsNot2ch]
+
+    if sVal &gt; 1:
+        self.decreaseProbs(probs, value, inds2ch)
+    else:
+        self.increaseProbs(probs, value, inds2ch)
+
+    # для того, щоб прибрати відхилення суми від одиниці, яке менше за eps
+    self.changeProbs(probs)</code></pre>
+</details>
+</dd>
+<dt id="backend.GenAlgorithm.GeneticAlgorithm.crossOver"><code class="name flex">
+<span>def <span class="ident">crossOver</span></span>(<span>self, population)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>функція формує сім'ї(списки по дві особини) з поточної популяції, які потім передає у функцію скрещування</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>population</code></strong></dt>
+<dd>поточна популяція</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>нова популяція, такого ж розміру, як і
+стара, але з особин утворених в результаті скрещювання</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def crossOver(self, population):
+    &#34;&#34;&#34;функція формує сім&#39;ї(списки по дві особини) з поточної популяції, які потім передає у функцію скрещування
+
+    Args:
+      population: поточна популяція
+
+    Returns:
+      нова популяція, такого ж розміру, як і  стара, але з особин утворених в результаті скрещювання
+
+    &#34;&#34;&#34;
+    # len(population) повинно бути парним
+
+    # N = (len(population) // 2) * 2
+    N = len(population)
+    families = [population[i: (i + 2)] for i in range(0, N, 2)]
+    # if len(population) % 2 == 1:
+    #     families.append([population[-1], population[0]])
+
+    # ймовірність скрещування
+    crossOverProb = 0.9
+    successors = [self.getSuccessor(f, crossOverProb) for f in families]
+    newPopulation = []
+    for i in successors:
+        newPopulation.extend(i)
+
+    return newPopulation</code></pre>
+</details>
+</dd>
+<dt id="backend.GenAlgorithm.GeneticAlgorithm.decreaseProbs"><code class="name flex">
+<span>def <span class="ident">decreaseProbs</span></span>(<span>self, probs: numpy.ndarray, value, inds2ch: List[int]) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>value не повинно бути більше за sum(probs)
+зменшуємо кожне число пропорційно:</p>
+<p>якщо індекс ймовірності знаходиться у списку inds2ch, то ймовірність не змінюється</p>
+<p>якщо індекс ймовірності p0 не належить списку inds2ch
+та ймовірність p0 становить 50% від суми всіх ймовірностей, то p0 зменшиться на 50% від числа value</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>probs</code></strong></dt>
+<dd>список ймовірностей</dd>
+<dt><strong><code>value</code></strong></dt>
+<dd>значення на яке сумарно треба зменшити ймовірності</dd>
+<dt><strong><code>inds2ch</code></strong></dt>
+<dd>список індексів ймовірностей, які не можна змінювати</dd>
+</dl>
+<p>Returns:</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def decreaseProbs(self, probs: np.ndarray, value, inds2ch: List[int]) -&gt; None:
+    &#34;&#34;&#34;value не повинно бути більше за sum(probs)
+    зменшуємо кожне число пропорційно:
+
+    якщо індекс ймовірності знаходиться у списку inds2ch, то ймовірність не змінюється
+
+    якщо індекс ймовірності p0 не належить списку inds2ch
+    та ймовірність p0 становить 50% від суми всіх ймовірностей, то p0 зменшиться на 50% від числа value
+
+    Args:
+      probs: список ймовірностей
+      value: значення на яке сумарно треба зменшити ймовірності
+      inds2ch: список індексів ймовірностей, які не можна змінювати
+
+    Returns:
+
+    &#34;&#34;&#34;
+    s = sum(probs[inds2ch])
+    percents = probs[inds2ch] / s
+    percentVals = percents * value
+    probs[inds2ch] = probs[inds2ch] - percentVals</code></pre>
+</details>
+</dd>
+<dt id="backend.GenAlgorithm.GeneticAlgorithm.fitness_func"><code class="name flex">
+<span>def <span class="ident">fitness_func</span></span>(<span>self, probs: List[float], goalValue: float, debug: bool = False, isGraph: bool = False, gamesCount: int = 5000) ‑> Union[float, Tuple[]]</span>
+</code></dt>
+<dd>
+<div class="desc"><p>функція обраховує значення функції фітнесу:
+чим значення коефіцієнту віддачі ймовірностей probs ближче до goalValue, тим значення фітнес функції менше
+і навпаки.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>probs</code></strong></dt>
+<dd>ймовірності для яких необхідно порахувати значення фітнес функції</dd>
+<dt><strong><code>goalValue</code></strong></dt>
+<dd>значення коефіцієнту віддачі при якому рахується значення фітнес функція</dd>
+<dt><strong><code>debug</code></strong></dt>
+<dd>параметр, який регулює інформативність функції</dd>
+<dt><strong><code>gamesCount</code></strong></dt>
+<dd>кількість ігор, для функції обрахунку коефіцієнту віддачі</dd>
+<dt><strong><code>isGraph</code></strong></dt>
+<dd>параметр, який відповідає за надання функцією додаткових даних необхідних для створення графіку</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>якщо isGraph рівне False</code></dt>
+<dd>значення фітнес функції</dd>
+<dt><code>якщо isGraph рівне True</code></dt>
+<dd>(коефіцієнт віддачі, значення фітнес функції)</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def fitness_func(self, probs: List[float,], goalValue: float, debug: bool = False, isGraph: bool = False,
+                 gamesCount: int = 5000) -&gt; Union[float, Tuple]:
+    &#34;&#34;&#34;функція обраховує значення функції фітнесу:
+    чим значення коефіцієнту віддачі ймовірностей probs ближче до goalValue, тим значення фітнес функції менше
+    і навпаки.
+
+    Args:
+      probs: ймовірності для яких необхідно порахувати значення фітнес функції
+      goalValue: значення коефіцієнту віддачі при якому рахується значення фітнес функція
+      debug: параметр, який регулює інформативність функції
+      gamesCount: кількість ігор, для функції обрахунку коефіцієнту віддачі
+      isGraph: параметр, який відповідає за надання функцією додаткових даних необхідних для створення графіку
+
+    Returns:
+      якщо isGraph рівне False: значення фітнес функції
+      якщо isGraph рівне True: (коефіцієнт віддачі, значення фітнес функції)
+
+    &#34;&#34;&#34;
+    currReturnCoef = self.bandit.getReturnCoefWithNCores(gamesCount=gamesCount, probs=probs, coresCount=-1)
+    # print(f&#34;\n{probs=}&#34;)
+    if debug is True:
+        print(f&#34;currFitness={abs(currReturnCoef - goalValue)}&#34;)
+        print(f&#34;{currReturnCoef=}\n&#34;)
+    if isGraph is True:
+        return currReturnCoef, abs(currReturnCoef - goalValue)
+
+    return abs(currReturnCoef - goalValue)</code></pre>
+</details>
+</dd>
+<dt id="backend.GenAlgorithm.GeneticAlgorithm.geneticAlgorithm"><code class="name flex">
+<span>def <span class="ident">geneticAlgorithm</span></span>(<span>self, probsCount: int, goalValue: float, populationSize: int = 6, population: List[List[float]] = None, gamesCount: int = 3000, generationsCount: int = 100, eps: float = 0.001, debug: bool = False, isGraph: bool = False) ‑> <built-in function array></span>
+</code></dt>
+<dd>
+<div class="desc"><p>основний метод генетичного алгоритму, який який керує усіма іншими методами та повертає результат,
+в виді списка ймовірностей</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>probsCount</code></strong></dt>
+<dd>довжина списку ймовірностей, який ви хотіли б отримати</dd>
+<dt><strong><code>goalValue</code></strong></dt>
+<dd>значення коефіцієнта віддачі, якого ви хотіли б досягти зі згенерованими ймовірностями</dd>
+<dt><strong><code>populationSize</code></strong></dt>
+<dd>розмір популяції генетичного алгоритму</dd>
+<dt><strong><code>population</code></strong></dt>
+<dd>список індивидів(списків з ймовірностями), які будуть використовуватись генетичним алгоритмом</dd>
+<dt><strong><code>gamesCount</code></strong></dt>
+<dd>кількість ігор, для функції обрахунку коефіцієнту віддачі,
+яка надалі буде використовуватися функцією фітнесу(fitness_func)</dd>
+<dt><strong><code>generationsCount</code></strong></dt>
+<dd>максимальна кількість поколінь після, якої зупиниться генетичний алгоритм</dd>
+<dt><strong><code>eps</code></strong></dt>
+<dd>похибка, яку дозволяє поточний генетичний алгоритм:
+генетичний алгоритм зупиниться,
+якщо (коефіцієнт віддачі згенерованих ймовірностей) - goalValue буде менше за цю похибку)</dd>
+<dt><strong><code>debug</code></strong></dt>
+<dd>
+<p>параметр, який регулює інформативність алгоритму:</p>
+<p>якщо debug рівне False алгоритм не інформує про зміни в поколіннях</p>
+<p>якщо debug рівне True алгоритм інформує про зміни в поколіннях</p>
+</dd>
+<dt><strong><code>isGraph</code></strong></dt>
+<dd>параметр, який відповідає за надання функцією додаткових даних необхідних для створення графіку</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>якщо isGraph рівне False</code></dt>
+<dd>список ймовірностей,
+які мають коефіцієнт віддачі рівним goalValue з певною похибкою eps</dd>
+<dt><code>якщо isGraph рівне True</code></dt>
+<dd>списки коефіцієнтів віддачі популяції у різних поколіннях</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def geneticAlgorithm(self, probsCount: int, goalValue: float,
+                     populationSize: int = 6, population: List[List[float]] = None, gamesCount: int = 3000,
+                     generationsCount: int = 100, eps: float = 0.001, debug: bool = False,
+                     isGraph: bool = False) -&gt; np.array:
+    &#34;&#34;&#34;основний метод генетичного алгоритму, який який керує усіма іншими методами та повертає результат,
+    в виді списка ймовірностей
+
+    Args:
+      probsCount: довжина списку ймовірностей, який ви хотіли б отримати
+      goalValue: значення коефіцієнта віддачі, якого ви хотіли б досягти зі згенерованими ймовірностями
+      populationSize: розмір популяції генетичного алгоритму
+      population: список індивидів(списків з ймовірностями), які будуть використовуватись генетичним алгоритмом
+      gamesCount: кількість ігор, для функції обрахунку коефіцієнту віддачі,
+        яка надалі буде використовуватися функцією фітнесу(fitness_func)
+      generationsCount: максимальна кількість поколінь після, якої зупиниться генетичний алгоритм
+      eps: похибка, яку дозволяє поточний генетичний алгоритм:
+        генетичний алгоритм зупиниться,
+        якщо (коефіцієнт віддачі згенерованих ймовірностей) - goalValue буде менше за цю похибку)
+      debug: параметр, який регулює інформативність алгоритму:
+
+        якщо debug рівне False алгоритм не інформує про зміни в поколіннях
+
+        якщо debug рівне True алгоритм інформує про зміни в поколіннях
+      isGraph: параметр, який відповідає за надання функцією додаткових даних необхідних для створення графіку
+
+    Returns:
+      якщо isGraph рівне False: список ймовірностей,
+        які мають коефіцієнт віддачі рівним goalValue з певною похибкою eps
+      якщо isGraph рівне True: списки коефіцієнтів віддачі популяції у різних поколіннях
+
+    &#34;&#34;&#34;
+    if population is None:
+        population = []
+        for _ in range(populationSize):
+            population.append(np.array(self.bandit.genBaseProbabilities(probsCount)))
+
+        # population = [[0.34620235, 0.07168648, 0.06275534, 0.51076111, 0.00859472],
+        #               [0.48455469, 0.29974074, 0.18556755, 0.02237517, 0.00776185],
+        #               [0.4076457, 0.24869838, 0.14315961, 0.03328834000000005, 0.16720797],
+        #               [0.15385934, 0.64327094, 0.14050975, 0.03888020000000005, 0.02347977],
+        #               [0.32335616, 0.08463666, 0.28513406, 0.04416111, 0.26271201],
+        #               [0.43279837, 0.25248431, 0.05619025, 0.2325301, 0.02599697], ]
+        #               [0.39709205, 0.23165409, 0.0515545 , 0.24932884, 0.07037052], ]
+        # fitness coefs: 0.65333333, 0.677     , 0.80883333, 0.5645    , 0.81633333
+
+        # population = [[0.13124844, 0.47042438, 0.0631639 , 0.26138892, 0.07377436],
+        #               [0.0952308 , 0.65992553, 0.14414762, 0.03988682, 0.06080923],
+        #               [0.43279837, 0.25248431, 0.05619025, 0.2325301 , 0.02599697],
+        #               [0.26570799, 0.52636168, 0.11265015, 0.05940529, 0.03587489],
+        #               [0.39709205, 0.23165409, 0.0515545 , 0.24932884, 0.07037052], ]
+        # fitness coefs: 0.76933333, 0.56766667, 0.77983333, 0.72416667, 0.802
+
+    # цільова функція(фітнес функція) чим менше значення, тим більша ймовірність виживання індивіда
+    fitness = lambda probs: self.fitness_func(probs=probs, goalValue=goalValue, gamesCount=gamesCount,
+                                              debug=debug, isGraph=isGraph)
+
+
+    fitnessVals = []
+    returnCoefsInGenerations = []
+    # if debug is True:
+    #     iterator = range(generationsCount)
+    # else:
+    #     iterator = tqdm(range(generationsCount))
+
+    # for generationIdx in tqdm(range(generationsCount)):
+    for generationIdx in range(generationsCount):
+        if debug is True:
+            print(&#34;\n######################generation:&#34;, generationIdx)
+
+        fitnessVals = np.array([fitness(ps) for ps in population])
+        if isGraph is True:
+            mass = fitnessVals.copy()
+            fitnessVals = np.array([i[1] for i in mass])
+            returnCoefsInGenerations.append([i[0] for i in mass])
+
+        if debug is True:
+            print(f&#34;{fitnessVals=}\n&#34;)
+
+        # Обчислення коефіцієнту виживання кожного індивіду
+        surviveProbs = self.getSurviveProbs(fitnessVals)
+        # print(f&#34;{surviveProbs=}\n&#34;)
+
+        # Перевірка умов зупинки Генетичного Алгоритму
+        if any(fitnessVals &lt;= eps):
+            if debug is True:
+                print(&#34;\n-----------------fitness values to break cycle:&#34;, fitnessVals)
+            break
+
+        # Відбір
+        population = self.selection(population, surviveProbs)
+
+        # Скрещування
+        population = self.crossOver(population)
+        for idx in range(len(population)):
+            self.changeProbs(population[idx])
+
+        # Мутація
+        # ймовірність мутації кожної особини
+        mutateProb = 0.2
+        for idx in range(len(population)):
+            rNumb = np.random.choice([0, 1], size=1, p=[1 - mutateProb, mutateProb])[0]
+            if rNumb:
+                self.mutatePerson(population[idx], indpb=1 / len(population[idx]), debug=debug)
+
+    if isGraph is True:
+        return returnCoefsInGenerations
+
+    mass = sorted(list(zip(fitnessVals, range(len(fitnessVals)))), key=lambda x: x[0])
+    population = [population[i[1]] for i in mass]
+    return population[0]</code></pre>
+</details>
+</dd>
+<dt id="backend.GenAlgorithm.GeneticAlgorithm.getSuccessor"><code class="name flex">
+<span>def <span class="ident">getSuccessor</span></span>(<span>self, family: array(typing.List[typing.Iterable[float]], dtype=object), crossOverProb: float)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>функціє реалізує одноточкове скрещування для генетичного алгоритму</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>family</code></strong></dt>
+<dd>список з двох особин для скрещування</dd>
+<dt><strong><code>crossOverProb</code></strong></dt>
+<dd>ймовірність скрещювання(досить велика ймовірність)</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>повертає двох особин:</p>
+<dl>
+<dt><code>якщо скрещування відбулось</code></dt>
+<dd>повертаються нові особини, які є результатом скрещювання</dd>
+<dt><code>якщо скрещування не відбулось</code></dt>
+<dd>повертаються батьки(список family)</dd>
+</dl></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def getSuccessor(self, family: np.array(np.array(List[Iterable[float]])), crossOverProb: float):
+    &#34;&#34;&#34;функціє реалізує одноточкове скрещування для генетичного алгоритму
+
+    Args:
+      family: список з двох особин для скрещування
+      crossOverProb: ймовірність скрещювання(досить велика ймовірність)
+
+    Returns:
+      повертає двох особин:
+
+      якщо скрещування відбулось: повертаються нові особини, які є результатом скрещювання
+
+      якщо скрещування не відбулось: повертаються батьки(список family)
+
+    &#34;&#34;&#34;
+    parent1, parent2 = family
+    gensCount = len(parent1)
+
+    # low border is inclusive, high border is exclusive
+    splitIdx = np.random.randint(1, gensCount)
+    # Х.-батько: a1 | b1,c1,d1; Х.-мати: a2 | b2,c2,d2; Х.-потомок: a1,b2,c2,d2
+    successor1 = np.array(list(parent1[: splitIdx]) + list(parent2[splitIdx:]))
+
+    # Х.-батько: a1 | b1,c1,d1; Х.-мати: a2 | b2,c2,d2; Х.-потомок: a2,b1,c1,d1
+    successor2 = np.array(list(parent2[: splitIdx]) + list(parent1[splitIdx:]))
+
+    # low border is inclusive, high border is exclusive
+    rIdx = np.random.choice([0, 1], size=1, p=[1 - crossOverProb, crossOverProb])[0]
+    if rIdx == 1:
+        self.changeProbs(successor1)
+        self.changeProbs(successor2)
+        return [successor1, successor2]
+    else:
+        return family</code></pre>
+</details>
+</dd>
+<dt id="backend.GenAlgorithm.GeneticAlgorithm.getSurviveProbs"><code class="name flex">
+<span>def <span class="ident">getSurviveProbs</span></span>(<span>self, fitnessVals: array(typing.List[typing.Iterable[float]], dtype=object)) ‑> array(typing.List[typing.Iterable[float]], dtype=object)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>функція обраховує ймовірність виживання кожної окремої особини з популяції</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>fitnessVals</code></strong></dt>
+<dd>список значень функції фітнесу особин для популяції</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>список ймовірностей виживання особин з популяції, обрахованний на основі значень функції фітнесу</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def getSurviveProbs(self, fitnessVals: np.array(List[Iterable[float]])) -&gt; np.array(List[Iterable[float]]):
+    &#34;&#34;&#34;функція обраховує ймовірність виживання кожної окремої особини з популяції
+
+    Args:
+      fitnessVals: список значень функції фітнесу особин для популяції
+
+    Returns:
+      список ймовірностей виживання особин з популяції, обрахованний на основі значень функції фітнесу
+
+    &#34;&#34;&#34;
+    fitnessVals[fitnessVals == 0] = 0.000001
+
+    invS = sum(1 / fitnessVals)
+    surviveProbs = (1 / fitnessVals) / invS
+    return surviveProbs</code></pre>
+</details>
+</dd>
+<dt id="backend.GenAlgorithm.GeneticAlgorithm.increaseProbs"><code class="name flex">
+<span>def <span class="ident">increaseProbs</span></span>(<span>self, probs: numpy.ndarray, value, inds2ch: List[int])</span>
+</code></dt>
+<dd>
+<div class="desc"><p>value не повинно бути більше за sum(probs)
+збільшуємо кожне число пропорційно:</p>
+<p>якщо індекс ймовірності знаходиться у списку inds2ch, то ймовірність не змінюється</p>
+<p>якщо індекс ймовірності p0 не належить списку inds2ch
+та ймовірність p0 становить 50% від суми всіх ймовірностей, то p0 збільшиться на 50% від числа value</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>probs</code></strong></dt>
+<dd>список ймовірностей</dd>
+<dt><strong><code>value</code></strong></dt>
+<dd>значення на яке сумарно треба зменшити ймовірності</dd>
+<dt><strong><code>inds2ch</code></strong></dt>
+<dd>список індексів ймовірностей, які не можна змінювати</dd>
+</dl>
+<p>Returns:</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def increaseProbs(self, probs: np.ndarray, value, inds2ch: List[int]):
+    &#34;&#34;&#34;value не повинно бути більше за sum(probs)
+    збільшуємо кожне число пропорційно:
+
+    якщо індекс ймовірності знаходиться у списку inds2ch, то ймовірність не змінюється
+
+    якщо індекс ймовірності p0 не належить списку inds2ch
+    та ймовірність p0 становить 50% від суми всіх ймовірностей, то p0 збільшиться на 50% від числа value
+
+    Args:
+      probs: список ймовірностей
+      value: значення на яке сумарно треба зменшити ймовірності
+      inds2ch: список індексів ймовірностей, які не можна змінювати
+
+    Returns:
+
+    &#34;&#34;&#34;
+    s = sum(probs[inds2ch])
+    percents = probs[inds2ch] / s
+    percentVals = percents * value
+    probs[inds2ch] = probs[inds2ch] + percentVals</code></pre>
+</details>
+</dd>
+<dt id="backend.GenAlgorithm.GeneticAlgorithm.mutatePerson"><code class="name flex">
+<span>def <span class="ident">mutatePerson</span></span>(<span>self, person: <built-in function array>, indpb: float = 0.01, delta: float = 1, debug: bool = False) ‑> None</span>
+</code></dt>
+<dd>
+<div class="desc"><p>функція реалізує мутацію певної особини для генетичного алгоритму,
+де новий мутований ген вибирається,
+як значення нормально розподіленої випадкової величини
+з середнім рівним значенню поточного гену та дисперсією рівною одиничці</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>person</code></strong></dt>
+<dd>особина, яка буде піддана мутації</dd>
+<dt><strong><code>indpb</code></strong></dt>
+<dd>ймовірність мутації одного гена особини(однієї ймовірності)</dd>
+<dt><strong><code>delta</code></strong></dt>
+<dd>максимальна різниця між поточним геном та мутованим</dd>
+<dt><strong><code>debug</code></strong></dt>
+<dd>параметр, який регулює інформативність функції</dd>
+</dl>
+<p>Returns:</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def mutatePerson(self, person: np.array, indpb: float = 0.01, delta: float = 1, debug: bool = False) -&gt; None:
+    &#34;&#34;&#34;функція реалізує мутацію певної особини для генетичного алгоритму,
+    де новий мутований ген вибирається,
+    як значення нормально розподіленої випадкової величини
+    з середнім рівним значенню поточного гену та дисперсією рівною одиничці
+
+    Args:
+      person: особина, яка буде піддана мутації
+      indpb: ймовірність мутації одного гена особини(однієї ймовірності)
+      delta: максимальна різниця між поточним геном та мутованим
+      debug: параметр, який регулює інформативність функції
+
+    Returns:
+
+    &#34;&#34;&#34;
+
+    def get_truncated_normal(mean=0, sd=1, low=0, upp=10):
+        &#34;&#34;&#34;
+
+        Args:
+          mean:  (Default value = 0)
+          sd:  (Default value = 1)
+          low:  (Default value = 0)
+          upp:  (Default value = 10)
+
+        Returns:
+
+        &#34;&#34;&#34;
+        return truncnorm(
+            (low - mean) / sd, (upp - mean) / sd, loc=mean, scale=sd)
+
+    person0 = person.copy()
+    for idx in range(len(person)):
+        if np.random.uniform() &lt;= indpb:
+            if debug is True:
+                print(&#34;mutation of one gen in one person_________________&#34;)
+            leftBorder = max(0, person[idx] - delta)
+            rightBorder = min(1, person[idx] + delta)
+            # newGenVal = random.triangular(leftBorder, rightBorder, random.gauss(person[idx], 1))
+            newGenVal = get_truncated_normal(mean=person[idx], sd=1, low=leftBorder, upp=rightBorder).rvs()
+            if debug is True:
+                print(f&#34;old {person=}&#34;)
+                print(f&#34;old gen:{person[idx]}, new gen:{newGenVal}\n&#34;)
+            # newGenVal = np.random.uniform(low=leftBorder, high=rightBorder, size=1)[0]
+            person[idx] = newGenVal
+            self.changeProbs(person, indsNot2ch=[idx, ])
+
+            if debug is True:
+                print(f&#34;new {person=}\n&#34;)
+
+            if any(person &lt; 0):
+                print(f&#34;{person0=}&#34;)
+                print(f&#34;{person=}&#34;)</code></pre>
+</details>
+</dd>
+<dt id="backend.GenAlgorithm.GeneticAlgorithm.selection"><code class="name flex">
+<span>def <span class="ident">selection</span></span>(<span>self, population: List[<built-in function array>], surviveProbs)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>функція реалізовує відбір методом рулетки для генетичного алгоритму</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>population</code></strong></dt>
+<dd>поточна популяція</dd>
+<dt><strong><code>surviveProbs</code></strong></dt>
+<dd>ймовірності виживання кожної особини з поточної популяції</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>нова популяція, такого ж розміру, що і стара, але без відсіяних особин</p></div>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def selection(self, population: List[np.array,], surviveProbs):
+    &#34;&#34;&#34;функція реалізовує відбір методом рулетки для генетичного алгоритму
+
+    Args:
+      population: поточна популяція
+      surviveProbs: ймовірності виживання кожної особини з поточної популяції
+
+    Returns:
+      нова популяція, такого ж розміру, що і стара, але без відсіяних особин
+
+    &#34;&#34;&#34;
+    #
+    indices = list(np.random.choice(range(len(population)), size=len(population), p=surviveProbs))
+    newPopulation = list(np.array(population)[indices])
+    return newPopulation</code></pre>
+</details>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<h1>Index</h1>
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="backend" href="index.html">backend</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="backend.GenAlgorithm.GeneticAlgorithm" href="#backend.GenAlgorithm.GeneticAlgorithm">GeneticAlgorithm</a></code></h4>
+<ul class="two-column">
+<li><code><a title="backend.GenAlgorithm.GeneticAlgorithm.changeProbs" href="#backend.GenAlgorithm.GeneticAlgorithm.changeProbs">changeProbs</a></code></li>
+<li><code><a title="backend.GenAlgorithm.GeneticAlgorithm.crossOver" href="#backend.GenAlgorithm.GeneticAlgorithm.crossOver">crossOver</a></code></li>
+<li><code><a title="backend.GenAlgorithm.GeneticAlgorithm.decreaseProbs" href="#backend.GenAlgorithm.GeneticAlgorithm.decreaseProbs">decreaseProbs</a></code></li>
+<li><code><a title="backend.GenAlgorithm.GeneticAlgorithm.fitness_func" href="#backend.GenAlgorithm.GeneticAlgorithm.fitness_func">fitness_func</a></code></li>
+<li><code><a title="backend.GenAlgorithm.GeneticAlgorithm.geneticAlgorithm" href="#backend.GenAlgorithm.GeneticAlgorithm.geneticAlgorithm">geneticAlgorithm</a></code></li>
+<li><code><a title="backend.GenAlgorithm.GeneticAlgorithm.getSuccessor" href="#backend.GenAlgorithm.GeneticAlgorithm.getSuccessor">getSuccessor</a></code></li>
+<li><code><a title="backend.GenAlgorithm.GeneticAlgorithm.getSurviveProbs" href="#backend.GenAlgorithm.GeneticAlgorithm.getSurviveProbs">getSurviveProbs</a></code></li>
+<li><code><a title="backend.GenAlgorithm.GeneticAlgorithm.increaseProbs" href="#backend.GenAlgorithm.GeneticAlgorithm.increaseProbs">increaseProbs</a></code></li>
+<li><code><a title="backend.GenAlgorithm.GeneticAlgorithm.mutatePerson" href="#backend.GenAlgorithm.GeneticAlgorithm.mutatePerson">mutatePerson</a></code></li>
+<li><code><a title="backend.GenAlgorithm.GeneticAlgorithm.selection" href="#backend.GenAlgorithm.GeneticAlgorithm.selection">selection</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.10.0</a>.</p>
+</footer>
+</body>
+</html>

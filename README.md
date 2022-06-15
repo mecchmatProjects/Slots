@@ -1,20 +1,47 @@
-# Slots
+## Клонуємо даний репозиторій.
+#### git clone {repo-url}
 
-Modelling of slot- game.
+## Для роботи частини backend, 
+Необхідно встановити Python, бажано версії 3.8, та pip.
 
-There is an output matrix $N \times M$. 
+За бажанням можна встановити pipenv.
 
-There are $P$ items(symbols) corresponding for each column.
-The probability of the $i$-th item to be on the any row on the $j$-th
-column is equal $p_{i,j}$.
-The column is formed by the next rule:
-at first the bottom row is form ed, than another symbol is generated
-on the upper row - this symbol cannot be the same that is on bottom row:
-so the probality of $i_1$-th item to be there is $p_{i_1}/(1-p_{i})$, where
-$i \neq i_1$. The same way, the next symbol cannot equal to any of the previous
-ones, therefore, the probabilyty of the $i2$-th item to be on the column is
-$p_{i_2}/(1-p_{i}-p_{i_1}))$. By continuing so on, the last probability is
-$p_{i_N}/(1-p_{i}-p_{i_1} -p_{i_{N-1}}))$.
+У корні репозиторія відкриваємо консоль 
+#### та вводимо 
+#### pip install -r requirements.txt, якщо встановили Python та pip
+#### pipenv install Pipfile, якщо встановили Python, pip та pipenv
 
-If there are same $l$ symbols in the first $K$ columns then the output result
-is $S_{l,K}$.
+Після встановлення Python, pip, можливо pipenv та необхідних пакетів, переходимо до директорії backend.
+
+Запишіть в файл probabilities.txt бажані ймовірності, сума яких має дорівнювати 1
+
+#### або запустіть файл Bandit.py командою:
+#### python Bandit.py, якщо ви встановили Python та pip
+#### pipenv run python Bandit.py, якщо ви встановили Python, pip та pipenv
+
+На запит програми введіть бажаний коефіцієнт віддачі автомату, 
+через деякий час будуть згенеровані ймовірності для даного коефіцієнту віддачі, 
+які запишуться в файл probabilities.txt.
+
+(якщо вводити коефіцієнт віддачі, округляючи до десятих, обчислення займе менше часу, 
+ніж обчислення для коефіцієнту віддачі округленого до сотих)
+
+### Далі запускаємо flask сервер, який буде обмінюватися даними з сайтом на JavaScript.
+#### запустіть файл wsgi.py командою:
+#### python wsgi.py, якщо ви встановили Python та pip
+#### pipenv run python wsgi.py, якщо ви встановили Python, pip та pipenv
+Якщо не було ніяких проблем йдемо далі.
+### Документацію до коду частини backend можна знайти у директорії Slots\backend\doc\backend 
+
+## Для роботи частини user_interface, 
+яка являє собою сайт написаний на JavaScript, 
+який спілкується з сервером на Python фреймворці Flask,
+необхідно встановити npm - менеджер пакетів.
+
+Після встановлення npm, відкриваємо консоль та переходимо у директорію user_interface,
+#### вводимо в консоль npm install 
+для встановлення всіх необхідних пакетів для роботи сайту.
+У директорії user_interface повинна з'явитися нова директорія node_modules.
+#### Для старту сервера сайту необхідно ввести в консоль npm start.
+Далі переходимо за адресою http://localhost:8080
+та використовуємо сайт
