@@ -1,1 +1,7 @@
 .idea
+.git
+user_interface/.DS_Store
+user_interface/dist
+user_interface/node_modules
+backend/tests/.*
+__pycache__
