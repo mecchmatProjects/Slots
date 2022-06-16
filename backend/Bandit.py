@@ -1,9 +1,11 @@
 from __future__ import annotations
 
 import os
+import time
 from multiprocessing import Pool
 from typing import Dict, Tuple, List, Optional, Union
 import numpy as np
+
 from tqdm import tqdm
 
 from backend.CustomExceptions import *
@@ -479,7 +481,7 @@ class OneHandBandit:
 
 if __name__ == "__main__":
     p2 = OneHandBandit(4, 3, 5)
-    # p2.setProbabilitiesFromTxtFile("probabilities.txt")
+    p2.setProbabilitiesFromTxtFile("probabilities.txt")
 
     p2.setPriceOfGame(10)
     p2.setWinningCombs({(0, 0, 0, 0): 15, (1, 1, 1, 1): 15, (2, 2, 2, 2): 15, (3, 3, 3, 3): 15, (1, 2, 3, 4): 20, })
@@ -504,20 +506,6 @@ if __name__ == "__main__":
     probsStrs = " ".join(map(str, probs))
     with open("probabilities.txt", "w") as f:
         f.write(probsStrs)
-    # modelingGamesCount = 2000
-    #
-    # print(p2.genBaseProbabilities(5, returnCoef=0.8))
-    # p2.getReturnCoefWithNCores(modelingGamesCount)
-    # l = []
-    # t0 = time.time()
-    # for i in range(10):
-    #
-    #     returnCoef = p2.getReturnCoefWithNCores(gamesCount=modelingGamesCount, coresCount=5)
-    #     l.append(returnCoef)
-    #     print(f"{i}) this one hand bandit return coefficient: {returnCoef} "
-    #           f"for {modelingGamesCount} games")
-    # print("min max range:", max(l) - min(l))
-    # print(time.time() - t0, "secs")
 
 # метод ньютона
 

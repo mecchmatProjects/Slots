@@ -13,7 +13,7 @@ class GeneticAlgorithm:
         self.bandit: OneHandBandit = bandit
 
     def geneticAlgorithm(self, probsCount: int, goalValue: float,
-                         populationSize: int = 6, population: List[List[float]] = None, gamesCount: int = 3000,
+                         populationSize: int = 6, population: List[List[float]] = None, gamesCount: int = 10000,
                          generationsCount: int = 100, eps: float = 0.001, debug: bool = False,
                          isGraph: bool = False) -> np.array:
         """основний метод генетичного алгоритму, який який керує усіма іншими методами та повертає результат,
@@ -68,7 +68,6 @@ class GeneticAlgorithm:
         fitness = lambda probs: self.fitness_func(probs=probs, goalValue=goalValue, gamesCount=gamesCount,
                                                   debug=debug, isGraph=isGraph)
 
-
         fitnessVals = []
         returnCoefsInGenerations = []
         # if debug is True:
@@ -103,14 +102,14 @@ class GeneticAlgorithm:
             # Відбір
             population = self.selection(population, surviveProbs)
 
-            # Скрещування
+            # Схрещування
             population = self.crossOver(population)
             for idx in range(len(population)):
                 self.changeProbs(population[idx])
 
             # Мутація
             # ймовірність мутації кожної особини
-            mutateProb = 0.2
+            mutateProb = 0.1
             for idx in range(len(population)):
                 rNumb = np.random.choice([0, 1], size=1, p=[1 - mutateProb, mutateProb])[0]
                 if rNumb:
@@ -185,7 +184,7 @@ class GeneticAlgorithm:
         return newPopulation
 
     def crossOver(self, population):
-        """функція формує сім'ї(списки по дві особини) з поточної популяції, які потім передає у функцію скрещування
+        """функція формує сім'ї(списки по дві особини) з поточної популяції, які потім передає у функцію схрещування
 
         Args:
           population: поточна популяція
@@ -202,7 +201,7 @@ class GeneticAlgorithm:
         # if len(population) % 2 == 1:
         #     families.append([population[-1], population[0]])
 
-        # ймовірність скрещування
+        # ймовірність схрещування
         crossOverProb = 0.9
         successors = [self.getSuccessor(f, crossOverProb) for f in families]
         newPopulation = []
@@ -212,18 +211,18 @@ class GeneticAlgorithm:
         return newPopulation
 
     def getSuccessor(self, family: np.array(np.array(List[Iterable[float]])), crossOverProb: float):
-        """функціє реалізує одноточкове скрещування для генетичного алгоритму
+        """функціє реалізує одноточкове схрещування для генетичного алгоритму
 
         Args:
-          family: список з двох особин для скрещування
+          family: список з двох особин для схрещування
           crossOverProb: ймовірність скрещювання(досить велика ймовірність)
 
         Returns:
           повертає двох особин:
 
-          якщо скрещування відбулось: повертаються нові особини, які є результатом скрещювання
+          якщо схрещування відбулось: повертаються нові особини, які є результатом скрещювання
 
-          якщо скрещування не відбулось: повертаються батьки(список family)
+          якщо схрещування не відбулось: повертаються батьки(список family)
 
         """
         parent1, parent2 = family
@@ -231,10 +230,10 @@ class GeneticAlgorithm:
 
         # low border is inclusive, high border is exclusive
         splitIdx = np.random.randint(1, gensCount)
-        # Х.-батько: a1 | b1,c1,d1; Х.-мати: a2 | b2,c2,d2; Х.-потомок: a1,b2,c2,d2
+        # Х.-батько: a1 | b1,c1,d1; Х.-мати: a2 | b2,c2,d2; Х.-нащадок: a1,b2,c2,d2
         successor1 = np.array(list(parent1[: splitIdx]) + list(parent2[splitIdx:]))
 
-        # Х.-батько: a1 | b1,c1,d1; Х.-мати: a2 | b2,c2,d2; Х.-потомок: a2,b1,c1,d1
+        # Х.-батько: a1 | b1,c1,d1; Х.-мати: a2 | b2,c2,d2; Х.-нащадок: a2,b1,c1,d1
         successor2 = np.array(list(parent2[: splitIdx]) + list(parent1[splitIdx:]))
 
         # low border is inclusive, high border is exclusive

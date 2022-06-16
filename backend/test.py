@@ -32,8 +32,8 @@ def test1():
     # print("\ngamesCount=", 3000, "----------------\n")
     # test11(p2, gamesCount=3000)
     #
-    print("\ngamesCount=", 5000, "----------------\n")
-    test11(p2, gamesCount=5000)
+    # print("\ngamesCount=", 5000, "----------------\n")
+    # test11(p2, gamesCount=5000)
 
     print("\ngamesCount=", 10000, "---------------\n")
     test11(p2, gamesCount=10000)
@@ -102,28 +102,28 @@ def test2():
     # print("fitness val for probs and goalValue=0.9:", p2.genAlgo.fitness_func(probs=probs, goalValue=0.9))
     # print("return coef (goalValue):", p2.getReturnCoefWithNCores(probs=probs, gamesCount=10 ** 4))
     probs = [0.81674399, 0.10322578, 0.06974247, 0.0050837, 0.00520406]
-    gamesCount = 5000
+    # gamesCount = 5000
+    # meanRCs = p2.getReturnCoef(probs=probs, gamesCount=gamesCount, isGraph=True)
+    # plt.plot(list(range(1, gamesCount + 1)), meanRCs)
+    # plt.xlabel("Номер гри")
+    # plt.ylabel("Коефіцієнт віддачі")
+    # plt.plot([0, gamesCount], [0.9, 0.9], color="yellow")
+    # plt.annotate("0.9", (gamesCount - 5, 0.9))
+    #
+    # plt.plot([gamesCount - 10, gamesCount - 10], [0.9, meanRCs[-1]], color="red")
+    # plt.annotate(f"differance={round(abs(0.9 - meanRCs[-1]), 4)}", (gamesCount - 2 * 10 ** 3, 0.8))
+    # plt.show()
+
+    gamesCount = 20000
     meanRCs = p2.getReturnCoef(probs=probs, gamesCount=gamesCount, isGraph=True)
     plt.plot(list(range(1, gamesCount + 1)), meanRCs)
     plt.xlabel("Номер гри")
-    plt.ylabel("Середнє значення коефіцієнту віддачі")
+    plt.ylabel("Коефіцієнт віддачі")
     plt.plot([0, gamesCount], [0.9, 0.9], color="yellow")
     plt.annotate("0.9", (gamesCount - 5, 0.9))
 
     plt.plot([gamesCount - 10, gamesCount - 10], [0.9, meanRCs[-1]], color="red")
-    plt.annotate(f"differance={round(abs(0.9 - meanRCs[-1]), 4)}", (gamesCount - 2 * 10 ** 3, 0.8))
-    plt.show()
-
-    gamesCount = 10000
-    meanRCs = p2.getReturnCoef(probs=probs, gamesCount=gamesCount, isGraph=True)
-    plt.plot(list(range(1, gamesCount + 1)), meanRCs)
-    plt.xlabel("Номер гри")
-    plt.ylabel("Середнє значення коефіцієнту віддачі")
-    plt.plot([0, gamesCount], [0.9, 0.9], color="yellow")
-    plt.annotate("0.9", (gamesCount - 5, 0.9))
-
-    plt.plot([gamesCount - 10, gamesCount - 10], [0.9, meanRCs[-1]], color="red")
-    plt.annotate(f"differance={round(abs(0.9 - meanRCs[-1]), 4)}", (gamesCount - 2 * 10 ** 3, 0.8))
+    plt.annotate(f"differance={round(abs(0.9 - meanRCs[-1]), 4)}", (gamesCount - 2 * 10 ** 3, 1))
     plt.show()
 
 
@@ -153,8 +153,39 @@ def test3():
 
     plt.show()
 
+def test4():
+    """
+    функція, яка рахує та записує час на виконання функції обрахунку коефіцієнта віддачі
+    та записує сам результат виконання,
+    а потім каже про максимальні та мінімальні значення отриманих вибірок
+    """
+    p2 = OneHandBandit(4, 3, 5)
+    p = p2.genBaseProbabilities(5)
+    p2.setProbabilities(p)
+    p2.setPriceOfGame(10)
+    p2.setWinningCombs({(0, 0, 0, 0): 15, (1, 1, 1, 1): 15, (2, 2, 2, 2): 15, (3, 3, 3, 3): 15, (1, 2, 3, 4): 20, })
+    p2.addWinningComb((4, 4, 4, 4), 15)
+
+
+    l = []
+    rcs = []
+    modelingGamesCount = 10000
+    coresCount = 0
+
+    for i in range(100):
+        t0 = time.time()
+        returnCoef = p2.getReturnCoefWithNCores(gamesCount=modelingGamesCount, coresCount=coresCount)
+        l.append(time.time() - t0)
+        rcs.append(returnCoef)
+        print(f"{i}) this one hand bandit return coefficient: {returnCoef} "
+              f"for {modelingGamesCount} games"
+              f"using {l[-1]} secs")
+    print("min max time:", min(l), max(l))
+    print("min max min_max_diff returnCoef:", min(rcs), max(rcs), max(rcs) - min(rcs))
+
 
 if __name__ == '__main__':
     # test1()
     # test2()
-    test3()
+    # test3()
+    test4()
