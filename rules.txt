@@ -1,0 +1,11 @@
+
+- If you win 5 different coins you win their market value only
+- If you get 2 same coins out of the 5, you win their market value times 4 (Price x 4) in addition to the market value of the 3 other different coins.
+- if you get 3 same coins out of the 5, you win their market value times 10 (coin price x 10), in addition to the market value of the 2 other different coins.
+- if you get 4 same coins, you win their market value times 20 (coin price x 20) in the addition to the market value of the other coin.
+- if you get 5 same coins, you win their price x 100.
+- if you get 5 golden boxes you get 500$.
+
+
+
+
