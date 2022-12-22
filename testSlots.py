@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[50]:
+# In[58]:
 
 
 import numpy as np
@@ -37,16 +37,25 @@ def generateProbs(values, q=0.4):
     #probs[:-1] = np.power(pie, 1./5) 
     print(probs)
     
-    ts = 0
+    ts = 0.2
+    ss = 0
     for i in range(n-1):
-        pie = q/n/values[i]
-        print(pie)
-        probs[i] = min(np.power(pie,1./5), 0.5/n)
+        if values[i] * N > q: 
+            probs[i] = 0.01
+        else:
+            ss += values[i]**(-3)
         #print(probs[i])
         ts += probs[i]
     
     # print(ts)
-    probs[-1] = 1 - ts
+    probs[-1] = 0.2
+    
+    for i in range(n-1):
+        if values[i] * N <= q: 
+            probs[i] = (1-ts) * values[i]**(-3) /ss
+    
+    
+    
     print(probs)
     return probs    
 
@@ -108,7 +117,7 @@ def testMonteCarlo(coin_values, n):
         
 if __name__ == "__main__":
 
-        n = 5        
+        n = 5000      
         w = testMonteCarlo(COINS,n)
         ratio = w/n
         print(f"result={ratio}")
