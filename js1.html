@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+// Create a Map
+const COINS = new Map([
+  ["Xrp",0.4],
+  ["Ada",0.31],
+  ["Shiba",0.00000914],
+  ["Doge",0.087],
+  ["Gala",0.025],
+  ["Sand",0.55],
+  ["Mana",0.39],
+  ["FTM",0.18],
+  ["Trx",0.05],
+  ["Eos",0.92],
+  ["Hbar",0.0492],
+  ["Ftt",1.5],
+  ["GoldenBox",0]
+  
+]);
+
+
+function randomChoice(p) {
+    let rnd = p.reduce( (a, b) => a + b ) * Math.random();
+    return p.findIndex( a => (rnd-= a) < 0 );
+    //return 2;
+}
+
+function randomChoices(ar, count,p) {
+    return Array.from(Array(count), randomChoice.bind("0", p));
+    //var dd = Array.from(ar, randomChoice.bind("null", p));
+    //return " " + "__" + dd;
+}
+
+function generateValues(coin_values,probs,N){
+  let names = Array.from( coin_values.keys() );
+  let indices = randomChoices(names, N,probs);
+  var mas = [];
+  for(let i=0;i<5;i++){
+    mas[i]= names[indices[i]];
+  }
+  return mas;
+}
+
+
+function calculateWin(coins, coins_values){
+     
+     var resCoins = new Map();
+     
+     let sumDeb ="" + coins + ";;;";
+     for (const x of coins){
+        sumDeb += x;
+        resCoins.set(x, resCoins.get(x) + 1 || 1);
+        
+     }
+     
+     let values = Array.from( coins_values.values() );
+    let keys = Array.from( coins_values.keys() );
+   
+   
+		let sumWin =""+ values +":" + keys + "HHH\n";
+	   
+    for (const pair of resCoins.entries()) {
+        const name = pair[0];
+        const v = pair[1];
+  	    if (v==1){
+            sumWin += coins_values.get(name);
+        }
+        else if(v==2){
+            sumWin += 4 * coins_values.get(name) * 2;
+        }
+        else if(v==3){
+            sumWin += 10 *coins_values.get(name) * 3;
+        }
+        else if(v==4){
+            sumWin += 20 * coins_values.get(name) * 4;
+        }
+        else if(v==5){
+            sumWin += 100 * coins_values.get(name) * 5;
+            if (name=="GoldenBox"){
+                sumWin += GoldenBoxValue;
+            }
+        }
+         //sumWin += "; " + name +":" + v + "  ";
+		}
+		
+		return sumWin; 
+}
+
+
+function testMonteCarlo(coin_values, n){
+	let winSum = 0;
+	let probs = [0.00368261, 0.00469637, 0.64239319, 0.0149436,  0.04056883, 0.00270891,
+ 0.00377321, 0.00780725, 0.0237546,  0.00163984, 0.02406645, 0.00101328, 0.22895186];
+
+  var dbg = "";
+  for (let i = 0; i < n; i++) {
+                state = generateValues(coin_values,probs,5);
+                w = calculateWin(state, coin_values);
+                winSum += w;
+                dbg += state;
+	} 
+	
+	return winSum;
+}
+
+function myFunction() {
+
+let n = 1;      
+let w = testMonteCarlo(COINS, n);
+let ratio =  w/n;
+let text="" + w;
+console.log(ratio);    
+
+  document.getElementById("demo").innerHTML = text;
+}
+</script>
+</head>
+<body>
+
+<h2>Demo JavaScript in Head</h2>
+
+<p id="demo">A Paragraph.</p>
+
+<button type="button" onclick="myFunction()">Try it</button>
+
+</body>
+</html> 
+
