@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script>
+// Create a Map
+const COINS = new Map([
+  ["Xrp",0.4],
+  ["Ada",0.31],
+  ["Shiba",0.00000914],
+  ["Doge",0.087],
+  ["Gala",0.025],
+  ["Sand",0.55],
+  ["Mana",0.39],
+  ["FTM",0.18],
+  ["Trx",0.05],
+  ["Eos",0.92],
+  ["Hbar",0.0492],
+  ["Ftt",1.5],
+  ["GoldenBox",0]  
+]);
+
+function coinPie(x){
+  return Math.pow(x, 5) * 100 * 5 + 
+         5 * Math.pow(x, 4) * (1-x) * 20 * 4 +
+         10 * Math.pow(x, 3) * Math.pow(1-x,2) * 10 * 3 +
+         10 * Math.pow(x, 2) * Math.pow(1-x,3) * 4 * 2 +
+         5 * x * Math.pow(1-x,4);
+}
+
+function findCoinPie(a,b,t,eps=0.000001){
+    
+    let c = (a + b)/2;
+    
+    if ((b-a)<eps){
+        return c;
+        }
+    
+    if (coinPie(c)>t){
+        return findCoinPie(a,c,t,eps);
+        }
+    return findCoinPie(c,b,t,eps);
+   
+}
+
+
+function generateProbs(values, q=0.4){
+
+ var probs2 = [0.00368261, 0.00469637, 0, 0.0149436,  0.04056883, 0.00270891, 0.00377321, 0.00780725, 0.0237546,  0.00163984, 0.02406645, 0.00101328, 0];
+    
+    n = 13;// values.length;
+    var probs = Array.apply(0, Array(n));
+    
+    var sum_prob = 0;
+    var sum_out = 0;
+    
+    const minValue = Math.min.apply(Math, values) + 0.000001;
+    
+    var dbg = "";
+    for (let i = 0; i < n-1; i++) {
+             dbg += values[i];
+    		 if (values[i] > minValue){ 
+              const v = findCoinPie(0,0.5,q/(4*n)/values[i]);
+              probs[i] = v;
+              sum_out += coinPie(v) * values[i];
+              sum_prob += v;
+            }
+           // probs2[i] = values[i];
+    }
+    sum_out = q - sum_out;
+    sum_prob = 1 - sum_prob;
+    
+    
+    
+    return {sum_out:sum_out, sum_prob:sum_prob, probs:probs2};  
+
+}   
+
+
+function findFreeProb(a,b,value,sum_prob,min_price,gb_val,eps=0.000001){
+    
+    var c = (a + b)/2
+    var p = c;
+    var p1 = sum_prob-c;
+    if ((b-a)<eps){
+        
+        return {p:p,p1:p1};
+    }
+
+    
+    let val = Math.pow(p,5) * gb_val + coinPie(p1) * min_price;
+    
+    if (val>value){
+        return findFreeProb(a,c,value,sum_prob,min_price,gb_val,eps);
+    }
+    return findFreeProb(c,b,value,sum_prob,min_price,gb_val,eps);
+} 
+
+
+
+function generateRealProbs(coin_values){
+
+  let minPrice = 500;
+   let it =-1;
+   let i = 0;
+   for (const x of coin_values.values()) {
+        if(x>0 && x <minPrice){
+           minPrice = x;
+           it = i;
+        }
+        i++;
+   }
+   
+   let values = Array.from( coin_values.values() );
+
+   let {sums, sum_prob, probs } = generateProbs(values);
+   
+   
+   let probs1 = [0.00368261, 0.00469637, 0, 0.0149436,  0.04056883, 0.00270891, 0.00377321, 0.00780725, 0.0237546,  0.00163984, 0.02406645, 0.00101328, 0];
+   //let {p,p1} = {0.22895186 , 0.64239319};
+   //let p = 0.22895186;
+   //let p1 = 0.64239319;
+  let {p,p1} = findFreeProb(0,sum_prob,sums,sum_prob, minPrice, 500,0.000001);
+  
+ probs[probs.length-1] = p;
+ probs[it] = p1;
+ /*let probs = [0.00368261, 0.00469637, 0.64239319, 0.0149436,  0.04056883, 0.00270891,
+ 0.00377321, 0.00780725, 0.0237546,  0.00163984, 0.02406645, 0.00101328, 0.22895186];*/
+   return probs;
+}
+
+//https://stackoverflow.com/questions/41654006/numpy-random-choice-in-javascript
+function randomChoice(p) {
+    let rnd = p.reduce( (a, b) => a + b ) * Math.random();
+    return p.findIndex( a => (rnd-= a) < 0 );
+    //return 2;
+}
+
+function randomChoices(ar, count,p) {
+    return Array.from(Array(count), randomChoice.bind(null, p));
+    var dd = Array.from(ar, randomChoice.bind(null, p));
+    return " " + "__" + dd;
+}
+
+function generateValues(coin_values,probs,N){
+ let names = Array.from( coin_values.keys() );
+ let indices = randomChoices(names, N,probs);
+  var mas = [];
+  var tt = " ";
+  for(let i=0;i<N;i++){
+    mas[i]= names[indices[i]];
+    tt += names[indices[i]];
+  }
+  return mas;
+}
+
+
+function calculateWin(coins, coins_values){
+     
+     var resCoins = new Map();
+     
+     let sumDeb ="" + coins + ";;;";
+     for (const x of coins){
+        sumDeb += x;
+        resCoins.set(x, resCoins.get(x) + 1 || 1);
+        
+     }
+     
+    let values = Array.from( coins_values.values() );
+    let keys = Array.from( coins_values.keys() );
+   
+   
+		let sumWin = 0 ; //""+ values +":" + keys + "HHH\n";
+	   
+    for (const pair of resCoins.entries()) {
+        const name = pair[0];
+        const v = pair[1];
+  	    if (v==1){
+            sumWin += coins_values.get(name);
+        }
+        else if(v==2){
+            sumWin += 4 * coins_values.get(name) * 2;
+        }
+        else if(v==3){
+            sumWin += 10 *coins_values.get(name) * 3;
+        }
+        else if(v==4){
+            sumWin += 20 * coins_values.get(name) * 4;
+        }
+        else if(v==5){
+            sumWin += 100 * coins_values.get(name) * 5;
+            if (name=="GoldenBox"){
+                sumWin += GoldenBoxValue;
+            }
+        }
+         //sumWin += "; " + name +":" + v + "  ";
+		}
+		
+		return sumWin; 
+}
+
+
+function testMonteCarlo(coin_values, n){
+	let winSum = 0;
+	/*let probs =  [0.00368261, 0.00469637, 0.64239319, 0.0149436,  0.04056883, 0.00270891,
+ 0.00377321, 0.00780725, 0.0237546,  0.00163984, 0.02406645, 0.00101328, 0.22895186];*/
+ let values = Array.from( coin_values.values() );
+ 
+  let probs = generateRealProbs(coin_values);
+
+  var dbg = "P" +values + ";;;;" + probs;
+  for (let i = 0; i < n; i++) {
+               state = generateValues(coin_values,probs,5);
+              w = calculateWin(state, coin_values);
+              winSum += w;
+              //  dbg += state;
+	} 
+	
+	return winSum;
+}
+
+function myTests() {
+
+let n = 1;      
+let w = testMonteCarlo(COINS, n);
+let ratio =  w/n;
+let text="w=" + ratio +";";
+
+  document.getElementById("demo").innerHTML = text;
+}
+</script>
+</head>
+<body>
+
+<h2>Demo JavaScript in Head</h2>
+
+<p id="demo">Tests.</p>
+
+<button type="button" onclick="myTests()">Try it</button>
+
+</body>
+</html> 
+
+
