@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[116]:
+# In[1]:
 
 
 import numpy as np
@@ -20,19 +20,20 @@ COINS = {
   "Eos":0.92,
   "Hbar":0.0492,
   "Ftt":1.5,
-  "GoldenBox":0
+  "GoldenBox":0 # always consider BlackBox as last element
 }
 
 N = 5
 GoldenBoxValue = 500
+ARRVALUE = [1,4,10,20,100]
 
 
 def coinPie(x):
     
-    s5 = x**5 * 100 * 5
-    s4 = 5 * x**4 * (1-x) * 4
-    s3 = 10 * x**3 * (1-x)**2 * 3
-    s2 = 10 * x**2 * (1-x)**3 * 2
+    s5 = x**5 * 5 * ARRVALUE[4]
+    s4 = 5 * x**4 * (1-x) * 4 * ARRVALUE[3]
+    s3 = 10 * x**3 * (1-x)**2 * ARRVALUE[2] 
+    s2 = 10 * x**2 * (1-x)**3 * ARRVALUE[1]
     s1 = 5 * x * (1-x)**4
     
     return s1 + s2 + s3 + s4 + s5
@@ -46,38 +47,41 @@ def pltCp(h):
         x += h
         print(coinPie(x))
         
-def findCoinPie(a,b,t,eps=0.000001):
+def findCoinPie(a,b,value,eps=0.000001):
     
     c = (a + b)/2
     
     if (b-a)<eps:
         return c
     
-    if coinPie(c)>t:
-        return findCoinPie(a,c,t,eps)
-    return findCoinPie(c,b,t,eps)
+    if coinPie(c)>value:
+        return findCoinPie(a,c,value,eps)
+    return findCoinPie(c,b,value,eps)
     
     
 
-def generateProbs(values, q=0.3):
+def generateProbs(prices, q=0.4):
     # print(values)
-    probs = np.zeros(len(values))
-    n = len(values)
+    probs = np.zeros(len(prices))
+    n = len(prices)
     
     pie = q/n/GoldenBoxValue
     
     #probs[:-1] = np.power(pie, 1./5) 
     # print(probs)
     
+    minPrice = np.min(prices) + 0.0000001
+    bonusPrice = np.max(prices) - 0.0000001
+
+    VOLATILITY_PARAM = 4 * n
     sum_prob = 0
     sum_out = 0
     for i in range(n-1):
-        if values[i]  > 0.01: 
-            v = findCoinPie(0,1,q/(n)/values[i])
-            probs[i] = min(v,0.5)
+        if prices[i]  > minPrice and prices[i]  < bonusPrice: 
             
-            sum_out += coinPie(probs[i]) * values[i]
-
+            v = 0.005 # findCoinPie(0,0.5,q/VOLATILITY_PARAM/prices[i])           
+            probs[i] = v # min(v,0.5)
+            sum_out += coinPie(probs[i]) * prices[i]
             #print(probs[i])
             sum_prob += probs[i]
     
@@ -92,41 +96,41 @@ def generateProbs(values, q=0.3):
     #print(probs)
     return q - sum_out, 1-sum_prob, probs    
 
-def findFreeProb(a,b,value,sum_prob,min_price,gb_val,eps):
+def findFreeProb(a,b,value,sum_prob,min_price,golden_box_value,eps=0.00000001):
     
     c = (a + b)/2
     
     if (b-a)<eps:
         return c, sum_prob-c
     
-    val = c**5 * gb_val + coinPie(sum_prob-c) * min_price
+    val = c**5 * golden_box_value + coinPie(sum_prob-c) * min_price
     
     #print("vc:",val,c,sum_prob-c)
     
     if val>value:
-        return findFreeProb(a,c,value,sum_prob,min_price,gb_val,eps)
-    return findFreeProb(c,b,value,sum_prob,min_price,gb_val,eps)
+        return findFreeProb(a,c,value,sum_prob,min_price,golden_box_value,eps)
+    return findFreeProb(c,b,value,sum_prob,min_price,golden_box_value,eps)
 
 
 def generateRealProbs(coin_values):
      #print(coin_values)
     
     coin_prices = np.array([item if item>0 else 500 for item in coin_values.values()])
-    coin_names = np.array([item for item in coin_values.keys()])
-
-    s,t,probs = generateProbs(coin_prices) 
+    sum_to,prob_to,probs = generateProbs(coin_prices) 
     
-    print("p=",s,t)
+    # print("p=",sum_to,prob_to)
     
     min_price = np.min(coin_prices)
-    ind = np.argmax(coin_prices)
-    print(min_price,ind)
+    min_ind = np.argmin(coin_prices)
+    bon_ind = np.argmax(coin_prices)
+    # print(min_price,min_ind, bon_ind)
     
-    p,p1 = findFreeProb(0,t,s,t,min_price,GoldenBoxValue,0.000001)
     
-    probs[-1] = p 
-    probs[2] = p1
-    print(probs)
+    p_bonus,p_min = findFreeProb(0,prob_to,sum_to,prob_to,min_price,GoldenBoxValue,0.000001)
+    
+    probs[bon_ind] = p_bonus 
+    probs[min_ind] = p_min
+    # print(probs)
     return probs
 
 def generateValues(coin_values,probs):
@@ -155,13 +159,13 @@ def calculateWin(coins, coins_values):
         if v==1:
             sumWin += coins_values[k]
         elif v==2:
-            sumWin += 4 * coins_values[k] * 2
+            sumWin += ARRVALUE[1] * coins_values[k] * 2
         elif v==3:
-            sumWin += 10 * coins_values[k] * 3
+            sumWin += ARRVALUE[2] * coins_values[k] * 3
         elif v==4: 
-            sumWin += 20 * coins_values[k] * 4
+            sumWin += ARRVALUE[3] * coins_values[k] * 4
         elif v==5:
-            sumWin += 100 * coins_values[k] * 5
+            sumWin += ARRVALUE[4] * coins_values[k] * 5
             if k=="GoldenBox":
                 sumWin += GoldenBoxValue
     return sumWin
@@ -175,9 +179,9 @@ def testMonteCarlo(coin_values, n):
         
         for _ in range(n):
                 state = generateValues(coin_values,probs)
-                print("a=", state)
+                # print("a=", state)
                 w = calculateWin(state, coin_values)
-                print("w=",w)
+                # print("w=",w)
                 winSum += w
                 
         return winSum
@@ -185,7 +189,7 @@ def testMonteCarlo(coin_values, n):
         
 if __name__ == "__main__":
 
-        n = 50000      
+        n = 1000000      
         w = testMonteCarlo(COINS,n)
         ratio = w/n
         print(f"result={ratio}")
