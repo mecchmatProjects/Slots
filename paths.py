@@ -7,7 +7,7 @@ degrees = Counter({})
 WIDTH = 6
 HEIGHT = 3
 
-def dfs_for_area_rounds(W,H, x0,y0,d,path=[], have = []):
+def dfs_for_area_rounds(W,H, x0,y0,d,path=[], have = [], trash=[]):
 
 	global degrees
 	steps = ((0,1), (1,1), (1,0), (1,-1), (0,-1),(-1,-1),(-1,0),(-1,1))
@@ -25,12 +25,12 @@ def dfs_for_area_rounds(W,H, x0,y0,d,path=[], have = []):
                                 extra_connected += 1
                                 break
                     
-	print(extra_connected)
+	# print(extra_connected)
 	# print(path)
 	# input()
 	
 	if len(path) + extra_connected == d : 
-		print("path f:",path)
+		# print("path f:",path)
 		vals = []
 		for cell in path:
 			for nb in steps:
@@ -45,6 +45,8 @@ def dfs_for_area_rounds(W,H, x0,y0,d,path=[], have = []):
 				if val in vals:
 					continue
 				if val in have:
+					continue
+				if v1 in trash:
 					continue	
 				vals.append(val)
 		# degrees.append(len(vals))
@@ -62,8 +64,10 @@ def dfs_for_area_rounds(W,H, x0,y0,d,path=[], have = []):
 		if v1 in path:
 			continue
 		if v1 in have:
+			continue
+		if v1 in trash:
 			continue	
-		dfs_for_area_rounds(W,H,x1,y1,d,path,have)
+		dfs_for_area_rounds(W,H,x1,y1,d,path,have,trash)
 		path.pop(-1)
 				  		
 
@@ -77,27 +81,34 @@ f = open(FNAME,"w")
 
 calcul = {}
 
-for i in range(WIDTH):
-        for j in range(HEIGHT):
-                dfs_for_area_rounds(WIDTH,HEIGHT,i,j,4,[],[1])
-                # delete C^{d-1}_{d}?
-                print(degrees, file=f)
-                calcul[(i,j)] = degrees
-                degrees.clear() # = Counter({})
-                
-                
-f.close()
-
-
 def prob(p,q,degs,d):
         s = 0
         for k,v in degs.items():
                 s += v * q**k
          
-        return s*p**d                
+        return s * p**d                
 
 P = 0.1
-Q = 0.8
+Q = 0.9
+
+for i in range(WIDTH):
+        for j in range(HEIGHT):
+                for d in range(4,9):
+                    dfs_for_area_rounds(WIDTH,HEIGHT,i,j,d,[],[])
+                    # delete C^{d-1}_{d}?
+                    val = prob(P,Q,degrees,d)
+                    print(degrees, val, file=f)
+                    # calcul[(i,j)] = degrees.copy()		
+                    degrees.clear() # = Counter({})
+                print(";",file=f) 
+        print("",file=f)        
+                
+f.close()
+
+
+"""
+P = 0.1
+Q = 0.9
 for i in range(WIDTH):
         for j in range(HEIGHT):
                 deg = calcul[(i,j)]
@@ -105,8 +116,5 @@ for i in range(WIDTH):
                         val = prob(P,Q,deg,d)/d
                         print(val)
                        
-               
+"""               
                 
-
-
-
