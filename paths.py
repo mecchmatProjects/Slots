@@ -7,7 +7,7 @@ degrees = Counter({})
 WIDTH = 6
 HEIGHT = 3
 
-def dfs2(W,H, x0,y0,d,path=[]):
+def dfs_for_area_rounds(W,H, x0,y0,d,path=[], have = []):
 
 	global degrees
 	steps = ((0,1), (1,1), (1,0), (1,-1), (0,-1),(-1,-1),(-1,0),(-1,1))
@@ -15,8 +15,22 @@ def dfs2(W,H, x0,y0,d,path=[]):
 	# print("xy",x0,y0)
 	v = W*y0 + x0
 	path.append(v) 
-	if len(path)==d: 
-		# print("path f:",path)
+	
+	extra_connected = 0
+	for cell1 in have:
+        	for nb in steps:
+                        x2 = cell1 % W + nb[0] 
+                        y2 = cell1 // W + nb[1]
+                        if y2*W+x2 in path:
+                                extra_connected += 1
+                                break
+                    
+	print(extra_connected)
+	# print(path)
+	# input()
+	
+	if len(path) + extra_connected == d : 
+		print("path f:",path)
 		vals = []
 		for cell in path:
 			for nb in steps:
@@ -30,6 +44,8 @@ def dfs2(W,H, x0,y0,d,path=[]):
 					continue
 				if val in vals:
 					continue
+				if val in have:
+					continue	
 				vals.append(val)
 		# degrees.append(len(vals))
 		degrees.update([len(vals)])
@@ -45,11 +61,13 @@ def dfs2(W,H, x0,y0,d,path=[]):
 		# print("v1",v1)
 		if v1 in path:
 			continue
-		dfs2(W,H,x1,y1,d,path)
+		if v1 in have:
+			continue	
+		dfs_for_area_rounds(W,H,x1,y1,d,path,have)
 		path.pop(-1)
 				  		
 
-dfs2(6,3,0,0,2,[])
+dfs_for_area_rounds(6,3,0,0,2,[],[0,5])
 print(degrees)
 
 degrees.clear()
@@ -61,7 +79,7 @@ calcul = {}
 
 for i in range(WIDTH):
         for j in range(HEIGHT):
-                dfs2(WIDTH,HEIGHT,i,j,4,[])
+                dfs_for_area_rounds(WIDTH,HEIGHT,i,j,4,[],[1])
                 # delete C^{d-1}_{d}?
                 print(degrees, file=f)
                 calcul[(i,j)] = degrees
