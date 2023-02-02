@@ -57,16 +57,38 @@ degrees.clear()
 FNAME = "Coefs.txt"
 f = open(FNAME,"w")
 
+calcul = {}
 
 for i in range(WIDTH):
         for j in range(HEIGHT):
                 dfs2(WIDTH,HEIGHT,i,j,4,[])
                 # delete C^{d-1}_{d}?
                 print(degrees, file=f)
+                calcul[(i,j)] = degrees
                 degrees.clear() # = Counter({})
                 
                 
 f.close()
+
+
+def prob(p,q,degs,d):
+        s = 0
+        for k,v in degs.items():
+                s += v * q**k
+         
+        return s*p**d                
+
+P = 0.1
+Q = 0.8
+for i in range(WIDTH):
+        for j in range(HEIGHT):
+                deg = calcul[(i,j)]
+                for d in range(4,8):
+                        val = prob(P,Q,deg,d)/d
+                        print(val)
+                       
+               
+                
 
 
 
